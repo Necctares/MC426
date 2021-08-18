@@ -1,6 +1,7 @@
 # MC426
 
 ## Repositorio do Projeto de MC426 - Engenharia de Software
+## Tema: Solução de Saúde Pública -> Software de Gestão Hospitalar
 
 ### Integrantes do grupo:
 
