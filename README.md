@@ -2,6 +2,7 @@
 
 ## Repositorio do Projeto de MC426 - Engenharia de Software
 ## Tema: Solução de Saúde Pública -> Software de Gestão Hospitalar
+* Software para gestão de recursos de um hospital e outras funcionalidades como acompanhar estado de pacientes, observar horários de consultar e exames, armazenar dados sobre tratamentos, controle de vagas e outros.
 
 ### Integrantes do grupo:
 
