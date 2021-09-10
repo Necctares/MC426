@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package View;
+package Menu;
 
 /**
  *
@@ -61,8 +61,6 @@ public class MenuInicialView extends javax.swing.JFrame {
         jLabel1.setText("Usuário");
 
         jLabel2.setText("Senha");
-
-        jPasswordField1.setText("jPasswordField1");
 
         jToggleButton1.setText("Entrar");
 
@@ -143,6 +141,7 @@ public class MenuInicialView extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MenuInicialView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
