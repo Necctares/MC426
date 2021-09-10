@@ -30,6 +30,9 @@ class DataBase {
 
             String cmd = "CREATE DATABASE IF NOT EXISTS HOSPITAL";
             statement.executeUpdate(cmd);
+
+            startTables();
+
             System.out.println("Banco de dados criado com sucesso...");
         } catch (SQLException se) {
             se.printStackTrace();
@@ -50,6 +53,12 @@ class DataBase {
             }
         }
         System.out.println("Finalizado");
+    }
+
+    private void startTables() {
+
+        String cmd = "CREATE TABLE IF NOT EXISTS PESSOA " + "(nome VARCHAR(100), " + " telefone VARCHAR(13), " +
+        "(cpf INTEGER not NULL, " + " age INTEGER, " + " PRIMARY KEY ( id ))";
     }
 
     void makeAcess() {
@@ -76,6 +85,13 @@ class DataBase {
         } catch (SQLException se) {
             se.printStackTrace();
         }
+        statement = null;
+        connection = null;
         System.out.println("Conexao encerrada com sucesso.");
+    }
+
+    void inserirPessoa(String pessoaValues) {
+        makeAcess();
+
     }
 }
