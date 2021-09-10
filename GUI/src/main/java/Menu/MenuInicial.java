@@ -29,9 +29,9 @@ public class MenuInicial extends javax.swing.JFrame {
 
         jTextField2 = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
-        jToggleButton1 = new javax.swing.JToggleButton();
-        jToggleButton2 = new javax.swing.JToggleButton();
-        jToggleButton3 = new javax.swing.JToggleButton();
+        loginInicial = new javax.swing.JToggleButton();
+        cadastroInicial = new javax.swing.JToggleButton();
+        botaoFechar = new javax.swing.JToggleButton();
 
         jTextField2.setText("jTextField2");
 
@@ -48,24 +48,24 @@ public class MenuInicial extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jToggleButton1.setText("Login");
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+        loginInicial.setText("Login");
+        loginInicial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
+                loginInicialActionPerformed(evt);
             }
         });
 
-        jToggleButton2.setText("Cadastrar");
-        jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
+        cadastroInicial.setText("Cadastrar");
+        cadastroInicial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton2ActionPerformed(evt);
+                cadastroInicialActionPerformed(evt);
             }
         });
 
-        jToggleButton3.setText("Fechar");
-        jToggleButton3.addActionListener(new java.awt.event.ActionListener() {
+        botaoFechar.setText("Fechar");
+        botaoFechar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton3ActionPerformed(evt);
+                botaoFecharActionPerformed(evt);
             }
         });
 
@@ -78,42 +78,42 @@ public class MenuInicial extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(74, 74, 74)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jToggleButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jToggleButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))
+                            .addComponent(loginInicial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cadastroInicial, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))
                         .addGap(0, 73, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jToggleButton3)))
+                        .addComponent(botaoFechar)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(103, 103, 103)
-                .addComponent(jToggleButton1)
+                .addComponent(loginInicial)
                 .addGap(30, 30, 30)
-                .addComponent(jToggleButton2)
+                .addComponent(cadastroInicial)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
-                .addComponent(jToggleButton3)
+                .addComponent(botaoFechar)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+    private void loginInicialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginInicialActionPerformed
         MenuLogin telaDeLogin = new MenuLogin();
         telaDeLogin.setVisible(true);
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
+    }//GEN-LAST:event_loginInicialActionPerformed
 
-    private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
+    private void cadastroInicialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastroInicialActionPerformed
         MenuCadastro telaDeCadastro = new MenuCadastro();
         telaDeCadastro.setVisible(true);
-    }//GEN-LAST:event_jToggleButton2ActionPerformed
+    }//GEN-LAST:event_cadastroInicialActionPerformed
 
-    private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
+    private void botaoFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoFecharActionPerformed
         dispose();
-    }//GEN-LAST:event_jToggleButton3ActionPerformed
+    }//GEN-LAST:event_botaoFecharActionPerformed
 
     /**
      * @param args the command line arguments
@@ -154,10 +154,10 @@ public class MenuInicial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JToggleButton botaoFechar;
+    private javax.swing.JToggleButton cadastroInicial;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JToggleButton jToggleButton2;
-    private javax.swing.JToggleButton jToggleButton3;
+    private javax.swing.JToggleButton loginInicial;
     // End of variables declaration//GEN-END:variables
 }
