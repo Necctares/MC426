@@ -78,4 +78,12 @@ class DataBase {
         }
         System.out.println("Conexao encerrada com sucesso.");
     }
+
+    public void adicionarPessoa(String cadastro){
+
+    }
+
+    public void removerPessoa(String cpf){
+
+    }
 }
