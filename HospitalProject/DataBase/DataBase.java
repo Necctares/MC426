@@ -58,7 +58,7 @@ class DataBase {
     private void startTables() throws SQLException {
 
         String cmd = "CREATE TABLE IF NOT EXISTS PESSOA " + "(nome VARCHAR(100), " + " telefone VARCHAR(13), " +
-        "(cpf INTEGER not NULL, " + " age INTEGER, " + " PRIMARY KEY ( id ))";
+        "(cpf INTEGER not NULL, " + " age INTEGER, " + " PRIMARY KEY ( cpf ))";
         statement.executeUpdate(cmd);
     }
 
@@ -94,6 +94,13 @@ class DataBase {
     void adicionarPessoa(String pessoaValues) throws SQLException {
         makeAcess();
         String cmd = "INSERT INTO PESSOA VALUES " + pessoaValues;
+        statement.executeUpdate(cmd);
+        closeAcess();
+    }
+
+    void removerPessoa(String pessoaValues){
+        makeAcess();
+        String cmd = "REMOVE FROM PESSOA " + "WHERE cpf = " + pessoaValues;
         statement.executeUpdate(cmd);
         closeAcess();
     }

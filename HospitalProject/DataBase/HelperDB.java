@@ -8,19 +8,20 @@ import HospitalProject.Targets.*;
 
 //TODO Implementar HelperDB
 public class HelperDB{
-    private static DataBase db;
+    private DataBase db;
+    private static HelperDB instance;
 
     public HelperDB(){
-        if(db == null){
-            db = new DataBase();
+        if(instance == null){
+            instance = new HelperDB();
         }
     }
 
-    public static DataBase getDB(){
-        if(db == null){
-            db = new DataBase();
+    public static HelperDB getDB(){
+        if(instance == null){
+            instance = new HelperDB();
         }
-        return db;
+        return instance;
     }
 
     /**
@@ -32,7 +33,7 @@ public class HelperDB{
         db.closeAcess();
     }
 
-    public void operacaoPessoa(ACAO operacao, Pessoa pessoa){
+    public void operacaoCadastro(ACAO operacao, Pessoa pessoa){
         if(operacao == ACAO.ADICIONAR){
             if(isDigit(pessoa.getCPF()) && isDigit(pessoa.getTelefone()))  {
                 String cadastro = "(" + pessoa.getNome() + "," + pessoa.getTelefone() + "," + pessoa.getCPF() + ")";
@@ -41,10 +42,10 @@ public class HelperDB{
         }
         else if(operacao == ACAO.REMOVER){
             if(isDigit(pessoa.getCPF()) && isDigit(pessoa.getTelefone()))  {
-                String cadastro = "(" + pessoa.getCPF() + ")";
-                db.removerPessoa(cadastro);
+                db.removerPessoa(pessoa.getCPF());
             }    
         }
+        /*quando colocar detecçao de erro no GUI para telefone e cpf serem apenas numeros tirar os daqui*/
     }
 
     public Pessoa buscarPessoa(){

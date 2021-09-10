@@ -6,10 +6,11 @@ public class Pessoa {
     private String cpf;
     private String idade;
 
-    public Pessoa(String nome, String telefone, String cpf){
+    public Pessoa(String nome, String telefone, String cpf, String idade){
         this.cpf = cpf;
         this.telefone = telefone;
         this.nome = nome;
+        this.idade = idade;
     }
 
     public String getCPF() {
@@ -20,5 +21,8 @@ public class Pessoa {
     }
     public String getTelefone() {
         return telefone;
+    }
+    public String getIdade() {
+        return idade;
     }
 }
