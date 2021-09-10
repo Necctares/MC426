@@ -55,10 +55,11 @@ class DataBase {
         System.out.println("Finalizado");
     }
 
-    private void startTables() {
+    private void startTables() throws SQLException {
 
         String cmd = "CREATE TABLE IF NOT EXISTS PESSOA " + "(nome VARCHAR(100), " + " telefone VARCHAR(13), " +
         "(cpf INTEGER not NULL, " + " age INTEGER, " + " PRIMARY KEY ( id ))";
+        statement.executeUpdate(cmd);
     }
 
     void makeAcess() {
@@ -90,8 +91,10 @@ class DataBase {
         System.out.println("Conexao encerrada com sucesso.");
     }
 
-    void inserirPessoa(String pessoaValues) {
+    void adicionarPessoa(String pessoaValues) throws SQLException {
         makeAcess();
-
+        String cmd = "INSERT INTO PESSOA VALUES " + pessoaValues;
+        statement.executeUpdate(cmd);
+        closeAcess();
     }
 }
