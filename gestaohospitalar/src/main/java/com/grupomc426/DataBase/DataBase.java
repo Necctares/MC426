@@ -31,8 +31,6 @@ class DataBase {
             String cmd = "CREATE DATABASE IF NOT EXISTS HOSPITAL";
             statement.executeUpdate(cmd);
 
-            startTables();
-
             System.out.println("Banco de dados criado com sucesso...");
         } catch (SQLException se) {
             se.printStackTrace();
@@ -53,19 +51,26 @@ class DataBase {
             }
         }
         System.out.println("Finalizado");
+        startTables();
     }
 
-    private void startTables() throws SQLException {
-
+    private void startTables(){
+        makeAcess();
         String cmd = "CREATE TABLE IF NOT EXISTS PESSOA " + "(nome VARCHAR(100), " + " telefone VARCHAR(13), " +
-        "(cpf INTEGER not NULL, " + " age INTEGER, " + " PRIMARY KEY ( cpf ))";
-        statement.executeUpdate(cmd);
+        "cpf VARCHAR(13) not NULL, " + " age INTEGER, " + " PRIMARY KEY ( cpf ))";
+        try {
+            statement.executeUpdate(cmd);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        closeAcess();
     }
 
     void makeAcess() {
         System.out.println("Conectando ao banco de dados...");
         try {
             connection = DriverManager.getConnection(DB_URL + "HOSPITAL", USER, PASS);
+            statement = connection.createStatement();
             System.out.println("Conexao estabelecida com sucesso.");
         } catch (SQLException e) {
             e.printStackTrace();
@@ -94,6 +99,7 @@ class DataBase {
     void adicionarPessoa(String pessoaValues){
         makeAcess();
         String cmd = "INSERT INTO PESSOA VALUES " + pessoaValues;
+        System.out.println("DEBUG CMD: " + cmd);
         try {
             statement.executeUpdate(cmd);
         } catch (SQLException e) {

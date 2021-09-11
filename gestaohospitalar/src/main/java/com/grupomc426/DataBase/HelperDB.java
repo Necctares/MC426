@@ -33,7 +33,8 @@ public class HelperDB{
     public void operacaoCadastro(ACAO operacao, Pessoa pessoa){
         if(operacao == ACAO.ADICIONAR){
             if(isDigit(pessoa.getCPF()) && isDigit(pessoa.getTelefone()))  {
-                String cadastro = "(" + pessoa.getNome() + "," + pessoa.getTelefone() + "," + pessoa.getCPF() + ")";
+                String cadastro = "('" + pessoa.getNome() + "', '" + pessoa.getTelefone() + "', '" + pessoa.getCPF() + "', " + pessoa.getIdade() + ")";
+                System.out.println("DEBUG: CPF: " + pessoa.getCPF());
                 db.adicionarPessoa(cadastro);
             }    
         }
