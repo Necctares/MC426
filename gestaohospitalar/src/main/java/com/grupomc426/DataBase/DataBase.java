@@ -99,7 +99,6 @@ class DataBase {
     void adicionarPessoa(String pessoaValues){
         makeAcess();
         String cmd = "INSERT INTO PESSOA VALUES " + pessoaValues;
-        System.out.println("DEBUG CMD: " + cmd);
         try {
             statement.executeUpdate(cmd);
         } catch (SQLException e) {
