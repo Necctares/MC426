@@ -194,6 +194,8 @@ public class MenuCadastro extends javax.swing.JFrame {
         
         Usuario novoUsuario = new Usuario(usuario, telefone, cpf, idade, senha, ehFuncionario);
         HelperDB.getDB().operacaoCadastro(ACAO.ADICIONAR, novoUsuario);
+        
+        dispose();
     }                                              
 
     private void tipoCadastroActionPerformed(java.awt.event.ActionEvent evt) {

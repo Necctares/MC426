@@ -126,6 +126,8 @@ public class MenuLogin extends javax.swing.JFrame {
         String senha = senhaLogin.getText();
         
         Usuario user = new Usuario(null, null, usuario, null, senha, true);
+        
+        dispose();
     }//GEN-LAST:event_botaoConfirmarActionPerformed
 
     /**
