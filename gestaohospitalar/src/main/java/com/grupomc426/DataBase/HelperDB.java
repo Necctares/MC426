@@ -1,8 +1,5 @@
 package com.grupomc426.DataBase;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+
 import com.grupomc426.Targets.*;
 
 //TODO Implementar HelperDB
