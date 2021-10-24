@@ -1,6 +1,7 @@
 package com.grupomc426.DataBase;
 
 import com.grupomc426.Targets.*;
+import com.grupomc426.Targets.Usuarios.Pessoa;
 
 //TODO Implementar HelperDB
 public class HelperDB{
