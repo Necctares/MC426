@@ -12,31 +12,31 @@ import com.grupomc426.Targets.Usuarios.Pessoa;
 public class controladorProntuario {
     private HelperDB db;
 
-    controladorProntuario() {
+    public controladorProntuario() {
         db = HelperDB.getDB();
     }
 
-    boolean registrarConsulta(Medico medico, Pessoa pessoa) {
+    public boolean registrarConsulta(Medico medico, Pessoa pessoa) {
         // TODO:
         return false;
     }
 
-    boolean adicionarMedicamentos(String prontuarioID, List<Medicamento> medicamentos) {
+    public boolean adicionarMedicamentos(String prontuarioID, List<Medicamento> medicamentos) {
         // TODO:
         return false;
     }
 
-    boolean adicionarExames(String prontuarioID, List<Exame> exames) {
+    public boolean adicionarExames(String prontuarioID, List<Exame> exames) {
         // TODO:
         return false;
     }
 
-    boolean assinarExame(String exameID, Medico medico) {
+    public boolean assinarExame(String exameID, Medico medico) {
         // TODO:
         return false;
     }
 
-    Prontuario obterProntuario(String prontuarioID) {
+    public Prontuario obterProntuario(String prontuarioID) {
         // TODO:
         return null;
     }
