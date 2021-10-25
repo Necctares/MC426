@@ -6,6 +6,7 @@
 package com.grupomc426.GUI;
 
 import com.grupomc426.Targets.*;
+import com.grupomc426.Targets.Usuarios.Usuario;
 
 /**
  *

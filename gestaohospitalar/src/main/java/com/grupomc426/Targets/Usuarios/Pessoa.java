@@ -1,4 +1,4 @@
-package com.grupomc426.Targets;
+package com.grupomc426.Targets.Usuarios;
 
 public class Pessoa {
     private String nome;
