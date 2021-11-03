@@ -11,12 +11,12 @@ public class controladorHorarios {
         db = HelperDB.getDB();
     }
 
-    public boolean registrarHorario(Medico medico, Horario horario) {
+    public boolean registrarHorario(Medico medico, java.time.LocalDateTime horario) {
         return db.registrarHorario(medico, horario);
     }
 
-    public boolean reservarHorario(Medico medico, Horario horario) {
-        return db.reservarHorario(medico, horario);
+    public boolean reservarHorario(Medico medico, java.time.LocalDateTime horario, Pessoa pessoa) {
+        return db.reservarHorario(medico, horario, pessoa);
     }
     //OBTER AGENDA É PEGAR A TABELA DO MEDICO E DOS HORARIOS
     public Agenda obterAgenda(Medico medico) {

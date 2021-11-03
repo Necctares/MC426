@@ -22,7 +22,7 @@ public class controladorGeral {
 
     ///subcontrolador prontuario
 
-    public boolean registrarConsulta(Medico medico, Usuario usuario, LocalDateTime horario) {
+    public boolean registrarConsulta(Medico medico, Usuario usuario, java.time.LocalDateTime horario) {
         return this.controladorProntuario.registrarConsulta(medico, usuario, horario);
     }
 
@@ -46,12 +46,12 @@ public class controladorGeral {
 
     //subcontrolador Horarios
 
-    public boolean registrarHorario(Medico medico, Horario horario) {
+    public boolean registrarHorario(Medico medico, LocalDateTime horario) {
         return this.controladorHorarios.registrarHorario(medico, horario);
     }
 
-    public boolean reservarHorario(Medico medico, Horario horario) {
-        return this.controladorHorarios.reservarHorario(medico, horario);
+    public boolean reservarHorario(Medico medico, LocalDateTime horario, Pessoa pessoa) {
+        return this.controladorHorarios.reservarHorario(medico, horario, pessoa);
     }
 
     public Agenda obterAgenda(Medico medico) {

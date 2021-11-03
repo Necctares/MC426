@@ -16,7 +16,7 @@ public class controladorProntuario {
     }
 
     public boolean registrarConsulta(Medico medico, Usuario pessoa, LocalDateTime horario) {
-        Consulta consulta = new Consulta(-1, medico, pessoa, horario);
+        Consulta consulta = new Consulta(-1, medico, pessoa, null, horario);
         return db.registrarConsulta(consulta);
     }
 

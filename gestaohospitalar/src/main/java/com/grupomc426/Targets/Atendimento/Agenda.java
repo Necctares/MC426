@@ -1,25 +1,26 @@
 package com.grupomc426.Targets.Atendimento;
 
 import java.util.List;
-import com.grupomc426.Targets.Usuarios.Medico;
+import java.time.LocalDateTime;
+import com.grupomc426.Targets.Usuarios.Usuario;
 
 public class Agenda {
-    private Medico medico;
-    private List<Horario> horarios;
+    private Usuario usuario;
+    private List<LocalDateTime> horarios;
 
-    public Agenda(Medico medico) {
-        this.medico = medico;
+    public Agenda(Usuario usuario) {
+        this.usuario = usuario;
     }
 
-    public void adicionarHorario (Horario horario) {
+    public void adicionarHorario (LocalDateTime horario) {
         horarios.add(horario);
     }
 
-    public Medico getMedico() {
-        return medico;
+    public Usuario getUsuario() {
+        return usuario;
     }
     
-    public List<Horario> getHorarios() {
+    public List<LocalDateTime> getHorarios() {
         return horarios;
     }
 }

@@ -1,8 +1,6 @@
 package com.grupomc426.DataBase;
 
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Date;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -77,9 +75,8 @@ class DataBase {
         String create_anotacoes = "CREATE TABLE IF NOT EXISTS ANOTACAO "
                 + "(cpf INTEGER not NULL, id INTEGER not NULL, anotacao TEXT, PRIMARY KEY(id))";
         String create_consulta = "CREATE TABLE IF NOT EXISTS CONSULTA "
-                + "(idConsulta INTEGER not NULL, crm INTEGER not NULL, cpf INTEGER not NULL, data DATETIME not NULL, PRIMARY KEY(idConsulta))";         
-        String create_horario = "CREATE TABLE IF NOT EXISTS HORARIO "
-                + "(data DATETIME not NULL, crm INTEGER not NULL"
+                + "(idConsulta INTEGER not NULL, crm INTEGER not NULL, cpf INTEGER not NULL, data DATETIME not NULL, PRIMARY KEY(idConsulta))";
+        String create_horario = "CREATE TABLE IF NOT EXISTS HORARIO " + "(data DATETIME not NULL, crm INTEGER not NULL, cpf INTEGER not NULL"
                 + "PRIMARY KEY(data, crm))";
         try {
             statement.executeUpdate(create_pessoa);
@@ -207,9 +204,9 @@ class DataBase {
         return true;
     }
 
-    public boolean adicionarHorario(Map<String, String> medico, Map<String, String> horario) {
+    public boolean adicionarHorario(Map<String, String> horario) {
         makeAcess();
-        String cmd = "INSERT INTO HORARIO VALUES " + horario.get("data") + medico.get("crm");
+        String cmd = "INSERT INTO HORARIO VALUES " + horario.get("data") + horario.get("crm");
         try {
             statement.executeUpdate(cmd);
         } catch (SQLException e) {
@@ -222,8 +219,7 @@ class DataBase {
 
     public boolean assinarProntuario(String prontuarioID, String assinatura) {
         makeAcess();
-        String cmd = "UPDATE PRONTUARIO SET assinatura=" + assinatura
-                + "WHERE idProntuario=" + prontuarioID;
+        String cmd = "UPDATE PRONTUARIO SET assinatura=" + assinatura + "WHERE idProntuario=" + prontuarioID;
         try {
             statement.executeUpdate(cmd);
         } catch (SQLException e) {
@@ -234,18 +230,16 @@ class DataBase {
         return true;
     }
 
-    /*TODO*/
+    /* TODO */
     public boolean obterProntuario(int prontuarioID) {
-        //proxima parte, fazer na GUI
+        // proxima parte, fazer na GUI
         return true;
-    }  
+    }
 
-    //TODO
-    public boolean removerHorario(Map<String, String> medico, Map<String, String> horario){
+    // TODO
+    public boolean removerHorario(Map<String, String> horario) {
         makeAcess();
-        String cmd = "REMOVE FROM HORARIO " + "WHERE field = " + horario.get("id") + horario.get("ano")
-                + horario.get("mes") + horario.get("dia") + horario.get("hora")
-                + horario.get("minuto") + medico.get("crm");
+        String cmd = "REMOVE FROM HORARIO " + "WHERE field = " + horario.get("data") + horario.get("crm") + horario.get("cpf");
         try {
             statement.executeUpdate(cmd);
         } catch (SQLException e) {

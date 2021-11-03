@@ -3,6 +3,7 @@ package com.grupomc426.DataBase;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
+import java.time.LocalDateTime;
 
 import com.grupomc426.Targets.Usuarios.*;
 import com.grupomc426.Targets.Atendimento.*;
@@ -88,7 +89,7 @@ public class HelperDB{
         mapaExame.put("resultado", exame.getResultado());
         mapaExame.put("foiAssinado", Boolean.toString(exame.getFoiAssinado()));
         mapaExame.put("assinatura", exame.getAssinatura());
-        mapaExame.put("horario", exame.getHorario().ToString());
+        mapaExame.put("horario", exame.getHorario().toString());
         return db.adicionarExame(mapaExame);
     }
     
@@ -115,28 +116,20 @@ public class HelperDB{
 
     
     //TODO controladorHorarios
-    public boolean registrarHorario(Medico medico, Horario horario) {
-        Map<String, String> mapaMedico = new HashMap<String, String>();
-        mapaMedico.put("crm", medico.getCrm());
+    public boolean registrarHorario(Medico medico, java.time.LocalDateTime horario) {
         Map<String, String> mapaHorario = new HashMap<String, String>();
-        mapaHorario.put("ano", Integer.toString(horario.getAno()));
-        mapaHorario.put("mes", Integer.toString(horario.getMes()));
-        mapaHorario.put("dia", Integer.toString(horario.getDia()));
-        mapaHorario.put("hora", Integer.toString(horario.getHora()));
-        mapaHorario.put("minuto", Integer.toString(horario.getMinuto()));
-        return db.adicionarHorario(mapaMedico, mapaHorario);
+        mapaHorario.put("horario", horario.toString());
+        mapaHorario.put("crm", medico.getCrm());
+        mapaHorario.put("cpf", null);
+        return db.adicionarHorario(mapaHorario);
     }
 
-    public boolean reservarHorario(Medico medico, Horario horario) {
-        Map<String, String> mapaMedico = new HashMap<String, String>();
-        mapaMedico.put("crm", medico.getCrm());
+    public boolean reservarHorario(Medico medico, LocalDateTime horario, Pessoa paciente) {
         Map<String, String> mapaHorario = new HashMap<String, String>();
-        mapaHorario.put("ano", Integer.toString(horario.getAno()));
-        mapaHorario.put("mes", Integer.toString(horario.getMes()));
-        mapaHorario.put("dia", Integer.toString(horario.getDia()));
-        mapaHorario.put("hora", Integer.toString(horario.getHora()));
-        mapaHorario.put("minuto", Integer.toString(horario.getMinuto()));
-        return db.removerHorario(mapaMedico, mapaHorario);
+        mapaHorario.put("horario", horario.toString());
+        mapaHorario.put("crm", medico.getCrm());
+        mapaHorario.put("cpf", paciente.getCPF());
+        return db.removerHorario(mapaHorario);
     }
 
     public Agenda obterAgenda(Medico medico) {

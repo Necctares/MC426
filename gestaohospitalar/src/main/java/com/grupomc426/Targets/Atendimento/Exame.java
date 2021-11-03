@@ -1,6 +1,6 @@
 package com.grupomc426.Targets.Atendimento;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import com.grupomc426.Targets.Usuarios.*;
 
@@ -13,10 +13,10 @@ public class Exame {
     private String resultado;
     private boolean foiAssinado;
     private String assinatura;
-    private Horario horario;
+    private LocalDateTime horario;
 
     public Exame(String titulo, String id, Medico medico, Usuario paciente, String anotacoes, String resultado,
-            boolean foiAssinado, String assinatura, Horario horario) {
+            boolean foiAssinado, String assinatura, LocalDateTime horario) {
         this.medico = medico;
         this.paciente = paciente;
         this.anotacoes = anotacoes;
@@ -60,7 +60,7 @@ public class Exame {
         return assinatura;
     }
 
-    public Horario getHorario(){
+    public LocalDateTime getHorario(){
         return horario;
     }
 }

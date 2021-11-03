@@ -3,7 +3,7 @@ package com.grupomc426.Targets.Atendimento;
 public class Horario {
     private int ano, mes, dia, hora, minuto;
 
-    public Horario(int ano, int mes, int dia, int hora, int minuto) {
+    public Horario (int ano, int mes, int dia, int hora, int minuto) {
         this.ano = ano;
         this.mes = mes;
         this.dia = dia;

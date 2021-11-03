@@ -10,11 +10,11 @@ public class Consulta {
     private Prontuario prontuario;
     private LocalDateTime horario;
 
-    public Consulta(int consultaID, Medico medico, Usuario usuario, LocalDateTime horario) {
+    public Consulta(int consultaID, Medico medico, Usuario usuario, Prontuario prontuario, LocalDateTime horario) {
         this.consultaID = consultaID;
         this.medico = medico;
         this.usuario = usuario;
-        this.prontuario = new Prontuario(0, usuario, null, null);
+        this.prontuario = prontuario;
         this.horario = horario;
     }
     
