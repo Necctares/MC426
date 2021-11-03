@@ -2,6 +2,7 @@ package com.grupomc426.DataBase;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Date;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -77,9 +78,9 @@ class DataBase {
                 + "(cpf INTEGER not NULL, id INTEGER not NULL, anotacao TEXT, PRIMARY KEY(id))";
         String create_consulta = "CREATE TABLE IF NOT EXISTS CONSULTA "
                 + "(idConsulta INTEGER not NULL, crm INTEGER not NULL, cpf INTEGER not NULL, data DATETIME not NULL, PRIMARY KEY(idConsulta))";         
-        String create_horario = "CREATE TABLE IF NOT EXISTS AGEN "
-                + "(idhorario INTEGER not NULL, ano INTEGER not NULL, mes INTEGER not NULL, dia INTEGER not NULL, "
-                + "hora INTEGER not NULL, minuto INTEGER not NULL, crm INTEGER not NULL, PRIMARY KEY(idhorario))";
+        String create_horario = "CREATE TABLE IF NOT EXISTS HORARIO "
+                + "(data DATETIME not NULL, crm INTEGER not NULL"
+                + "PRIMARY KEY(data, crm))";
         try {
             statement.executeUpdate(create_pessoa);
             statement.executeUpdate(create_usuario);
@@ -208,7 +209,41 @@ class DataBase {
 
     public boolean adicionarHorario(Map<String, String> medico, Map<String, String> horario) {
         makeAcess();
-        String cmd = "INSERT INTO HORARIO VALUES " + horario.get("id") + horario.get("ano")
+        String cmd = "INSERT INTO HORARIO VALUES " + horario.get("data") + medico.get("crm");
+        try {
+            statement.executeUpdate(cmd);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+        closeAcess();
+        return true;
+    }
+
+    public boolean assinarProntuario(String prontuarioID, String assinatura) {
+        makeAcess();
+        String cmd = "UPDATE PRONTUARIO SET assinatura=" + assinatura
+                + "WHERE idProntuario=" + prontuarioID;
+        try {
+            statement.executeUpdate(cmd);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+        closeAcess();
+        return true;
+    }
+
+    /*TODO*/
+    public boolean obterProntuario(int prontuarioID) {
+        //proxima parte, fazer na GUI
+        return true;
+    }  
+
+    //TODO
+    public boolean removerHorario(Map<String, String> medico, Map<String, String> horario){
+        makeAcess();
+        String cmd = "REMOVE FROM HORARIO " + "WHERE field = " + horario.get("id") + horario.get("ano")
                 + horario.get("mes") + horario.get("dia") + horario.get("hora")
                 + horario.get("minuto") + medico.get("crm");
         try {
@@ -219,26 +254,6 @@ class DataBase {
         }
         closeAcess();
         return true;
-    }
-
-    public boolean assinarExame(String exameID, String assinatura) {
-        makeAcess();
-        String cmd = "UPDATE EXAME SET assinatura=" + assinatura
-                + "WHERE idExame=" + exameID;
-        try {
-            statement.executeUpdate(cmd);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-        closeAcess();
-        return true;
-    }
-
-    String obterProntuario(int prontuarioID) {
-        // TODO
-        String resultado = null;
-        return resultado;
     }
 
 }

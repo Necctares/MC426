@@ -1,6 +1,7 @@
 package com.grupomc426.API;
 
 import java.util.List;
+import java.time.LocalDateTime;
 
 import com.grupomc426.DataBase.HelperDB;
 import com.grupomc426.Targets.Atendimento.*;
@@ -14,14 +15,14 @@ public class controladorProntuario {
         db = HelperDB.getDB();
     }
 
-    public boolean registrarConsulta(Medico medico, Usuario pessoa, Horario horario) {
-        Consulta consulta = new Consulta(medico, pessoa, horario);
+    public boolean registrarConsulta(Medico medico, Usuario pessoa, LocalDateTime horario) {
+        Consulta consulta = new Consulta(-1, medico, pessoa, horario);
         return db.registrarConsulta(consulta);
     }
 
     public boolean adicionarMedicamentos(int prontuarioID, List<Medicamento> medicamentos) {
         for(Medicamento medicamento : medicamentos){
-            if(db.adicionarMedicamento(prontuarioID, medicamento) == false){
+            if(!db.adicionarMedicamento(medicamento)){
                 return false;
             }
         }
@@ -30,7 +31,7 @@ public class controladorProntuario {
 
     public boolean adicionarExames(int prontuarioID, List<Exame> exames) {
         for(Exame exame : exames){
-            if(db.adicionarExame(prontuarioID, exame) == false){
+            if(!db.adicionarExame(exame)){
                 return false;
             }
         }
@@ -38,7 +39,7 @@ public class controladorProntuario {
     }
 
     public boolean assinarProntuario(String prontuarioID, Medico medico) {
-        return db.assinarProntuario(prontuarioID, medico);
+        return db.assinarProntuario(prontuarioID, medico.getCrm());
     }
 
     public Prontuario obterProntuario(int prontuarioID) {

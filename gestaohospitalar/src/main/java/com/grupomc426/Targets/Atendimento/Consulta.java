@@ -1,15 +1,16 @@
 package com.grupomc426.Targets.Atendimento;
 
 import com.grupomc426.Targets.Usuarios.*;
+import java.time.LocalDateTime;
 
 public class Consulta {
     private int consultaID;
     private Medico medico;
     private Usuario usuario;
     private Prontuario prontuario;
-    private Horario horario;
+    private LocalDateTime horario;
 
-    public Consulta(int consultaID, Medico medico, Usuario usuario, Horario horario) {
+    public Consulta(int consultaID, Medico medico, Usuario usuario, LocalDateTime horario) {
         this.consultaID = consultaID;
         this.medico = medico;
         this.usuario = usuario;
@@ -17,7 +18,7 @@ public class Consulta {
         this.horario = horario;
     }
     
-    public int getConsultaID(){
+    public int getID(){
         return consultaID;
     }
 
@@ -33,7 +34,7 @@ public class Consulta {
         return medico;
     }
 
-    public Horario getHorario() {
+    public LocalDateTime getHorario() {
         return horario;
     }
 }

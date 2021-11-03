@@ -40,12 +40,12 @@ public class Exame {
         return medico;
     }
 
-    public Usuario getUsuario(){
-        return paciente;
-    }
-
     public String getAnotacoes(){
         return anotacoes;
+    }
+
+    public Usuario getPaciente(){
+        return paciente;
     }
 
     public String getResultado(){
@@ -60,7 +60,7 @@ public class Exame {
         return assinatura;
     }
 
-    public Date getHorario(){
+    public Horario getHorario(){
         return horario;
     }
 }

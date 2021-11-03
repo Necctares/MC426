@@ -31,9 +31,13 @@ public class Horario {
         return minuto;
     }
 
-    @Override
     public String ToString(){
         String output = String.format("%d-%d-%d %d:%d", ano, mes, dia, hora, minuto);
         return output;
+    }
+
+    public String getID(){
+        String id = ano + "/" + mes + "/" + dia + " " + hora + ":" + minuto;
+        return id;
     }
 }
