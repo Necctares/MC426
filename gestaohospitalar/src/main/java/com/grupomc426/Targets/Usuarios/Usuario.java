@@ -12,4 +12,17 @@ public class Usuario extends Pessoa{
         this.senha = senha;
         this.ehFuncionario = ehFuncionario;
     }
+
+    
+    public String getID(){
+        return id;
+    }
+    
+    public String getSenha(){
+        return senha;
+    }
+    
+    public boolean getEhFuncionario(){
+        return ehFuncionario;
+    }
 }

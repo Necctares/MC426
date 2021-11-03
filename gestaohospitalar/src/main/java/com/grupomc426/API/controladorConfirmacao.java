@@ -1,11 +1,8 @@
 package com.grupomc426.API;
 
 import com.grupomc426.DataBase.HelperDB;
-import com.grupomc426.Targets.Atendimento.Agenda;
-import com.grupomc426.Targets.Atendimento.Horario;
-import com.grupomc426.Targets.Usuarios.Medico;
-import com.grupomc426.Targets.Usuarios.Pessoa;
-
+import com.grupomc426.Targets.Usuarios.*;
+import com.grupomc426.Targets.Atendimento.*;
 
 public class controladorConfirmacao {
     private HelperDB db;
@@ -14,8 +11,11 @@ public class controladorConfirmacao {
         db = HelperDB.getDB();
     }
 
-    public boolean confirmarHorario(Medico medico, Pessoa pessoa, Agenda agenda, Horario horario){
-        //TODO
-        return false;
+    public boolean confirmarHorario(Consulta consulta, Agenda agenda) {
+        return db.confirmarHorario(consulta, agenda);        
+    }
+
+    public boolean cancelarHorario(Consulta consulta, Agenda agenda) {
+        return db.cancelarHorario(consulta, agenda);
     }
 }
