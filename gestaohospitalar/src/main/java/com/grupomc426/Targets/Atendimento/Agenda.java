@@ -15,7 +15,11 @@ public class Agenda {
         horarios.add(horario);
     }
 
-    public Medico obterMedico() {
+    public Medico getMedico() {
         return medico;
-    }   
+    }
+    
+    public List<Horario> getHorarios() {
+        return horarios;
+    }
 }

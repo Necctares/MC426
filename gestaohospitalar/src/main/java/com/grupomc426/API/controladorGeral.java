@@ -1,13 +1,9 @@
 package com.grupomc426.API;
 
 import java.util.List;
-import com.grupomc426.Targets.Atendimento.Exame;
-import com.grupomc426.Targets.Atendimento.Prontuario;
-import com.grupomc426.Targets.Produtos.Medicamento;
-import com.grupomc426.Targets.Usuarios.Medico;
-import com.grupomc426.Targets.Usuarios.Pessoa;
-import com.grupomc426.Targets.Atendimento.Agenda;
-import com.grupomc426.Targets.Atendimento.Horario;
+import com.grupomc426.Targets.Produtos.*;
+import com.grupomc426.Targets.Usuarios.*;
+import com.grupomc426.Targets.Atendimento.*;
 
 public class controladorGeral {
     private controladorHorarios controladorHorarios;
@@ -22,9 +18,11 @@ public class controladorGeral {
     }
 
 
-    ///sub controlador prontuario
-    public boolean registrarConsulta(Medico medico, Pessoa pessoa) {
-        return this.controladorProntuario.registrarConsulta(medico, pessoa);
+
+    ///subcontrolador prontuario
+
+    public boolean registrarConsulta(Medico medico, Usuario usuario, Horario horario) {
+        return this.controladorProntuario.registrarConsulta(medico, usuario, horario);
     }
 
     public boolean adicionarMedicamentos(String prontuarioID, List<Medicamento> medicamentos) {
@@ -39,11 +37,14 @@ public class controladorGeral {
         return this.controladorProntuario.assinarExame(exameID, medico);
     }
 
-    public Prontuario obterProntuario(String prontuarioID) {
+    public Prontuario obterProntuario(int prontuarioID) {
         return this.controladorProntuario.obterProntuario(prontuarioID);
     }
 
+
+
     //subcontrolador Horarios
+
     public boolean registrarHorario(Medico medico, Horario horario) {
         return this.controladorHorarios.registrarHorario(medico, horario);
     }
@@ -58,13 +59,11 @@ public class controladorGeral {
         return this.controladorHorarios.obterAgenda(medico);
     }
 
+
+
     //subcontrolador Confirmacao
-
-    public boolean confirmarHorario(Medico medico, Pessoa pessoa, Agenda agenda, Horario horario){
-        return this.controladorConfirmacao.confirmarHorario(medico, pessoa, agenda, horario);
+    
+    public boolean confirmarHorario(Consulta consulta, Agenda agenda) {
+        return this.controladorConfirmacao.confirmarHorario(consulta, agenda);
     }
-
-
-
-
 }

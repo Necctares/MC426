@@ -1,10 +1,8 @@
 package com.grupomc426.API;
 
 import com.grupomc426.DataBase.HelperDB;
-import com.grupomc426.Targets.Atendimento.Agenda;
-import com.grupomc426.Targets.Atendimento.Horario;
-import com.grupomc426.Targets.Usuarios.Medico;
-import com.grupomc426.Targets.Usuarios.Pessoa;
+import com.grupomc426.Targets.Atendimento.*;
+import com.grupomc426.Targets.Usuarios.*;
 
 public class controladorHorarios {
     private HelperDB db;
@@ -14,17 +12,14 @@ public class controladorHorarios {
     }
 
     public boolean registrarHorario(Medico medico, Horario horario) {
-        //TODO;
-        return false;
+        return db.registrarHorario(medico, horario);
     }
 
     public boolean reservarHorario(Pessoa pessoa, Horario horario) {
-        //TODO;
-        return false;
+        return db.reservarHorario(pessoa, horario);
     }
-
+    //OBTER AGENDA É PEGAR A TABELA DO MEDICO E DOS HORARIOS
     public Agenda obterAgenda(Medico medico) {
-        //TODO;
-        return null;
+        return db.obterAgenda(medico);
     }
 }

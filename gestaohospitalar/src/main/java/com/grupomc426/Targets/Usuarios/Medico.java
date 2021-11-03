@@ -2,7 +2,7 @@ package com.grupomc426.Targets.Usuarios;
 
 public class Medico extends Usuario {
     private String crm;
-    private String assinatura;
+    private String assinatura;    
 
     public Medico(String nome, String telefone, String cpf_id, String idade, String senha, boolean ehFuncionario,
             String crm, String assinatura) {
