@@ -9,13 +9,13 @@ import com.grupomc426.Targets.Atendimento.*;
 public class controladorGeral {
     private controladorHorarios controladorHorarios;
     private controladorProntuario controladorProntuario;
-    private controladorConfirmacao controladorConfirmacao;
+    private controladorConsulta controladorConfirmacao;
 
     public controladorGeral() {
 
         controladorHorarios = new controladorHorarios();
         controladorProntuario = new controladorProntuario();
-        controladorConfirmacao = new controladorConfirmacao();
+        controladorConfirmacao = new controladorConsulta();
     }
 
 
