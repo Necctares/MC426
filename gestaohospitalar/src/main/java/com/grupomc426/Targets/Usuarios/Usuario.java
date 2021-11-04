@@ -6,9 +6,9 @@ public class Usuario extends Pessoa{
     private String senha;
     private boolean ehFuncionario;
 
-    public Usuario(String nome, String telefone, String cpf_id, String idade, String senha, boolean ehFuncionario) {
-        super(nome, telefone, cpf_id, idade);
-        this.id = cpf_id;
+    public Usuario(Pessoa pessoa, String senha, boolean ehFuncionario) {
+        super(pessoa.getNome(), pessoa.getTelefone(), pessoa.getCPF(), pessoa.getIdade());
+        this.id = pessoa.getCPF();
         this.senha = senha;
         this.ehFuncionario = ehFuncionario;
     }

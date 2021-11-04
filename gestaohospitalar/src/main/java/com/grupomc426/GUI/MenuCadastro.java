@@ -5,9 +5,12 @@
  */
 package com.grupomc426.GUI;
 
+import java.nio.charset.UnsupportedCharsetException;
+
 import com.grupomc426.App;
 import com.grupomc426.DataBase.*;
 import com.grupomc426.Targets.*;
+import com.grupomc426.Targets.Usuarios.Pessoa;
 import com.grupomc426.Targets.Usuarios.Usuario;
 
 /**
@@ -184,7 +187,7 @@ public class MenuCadastro extends javax.swing.JFrame {
         String telefone = telefoneCadastro.getText();
         String cpf = cpfCadastro.getText();
         String idade = idadeCadastro.getText();
-        String senha = senhaCadastro.getText();
+        String senha = senhaCadastro.getPassword().toString();
         boolean ehFuncionario;
         
         if (tipo.compareToIgnoreCase("Paciente") == 0) {
@@ -193,7 +196,8 @@ public class MenuCadastro extends javax.swing.JFrame {
             ehFuncionario = true;
         }
         
-        Usuario novoUsuario = new Usuario(usuario, telefone, cpf, idade, senha, ehFuncionario);
+        Pessoa novaPessoa = new Pessoa(usuario, telefone, cpf, idade);
+        Usuario novoUsuario = new Usuario(novaPessoa, senha, ehFuncionario);
         HelperDB.getDB().operacaoCadastro(ACAO.ADICIONAR, novoUsuario);
         
         dispose();

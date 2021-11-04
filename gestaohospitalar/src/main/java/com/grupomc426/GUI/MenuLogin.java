@@ -5,7 +5,7 @@
  */
 package com.grupomc426.GUI;
 
-import com.grupomc426.Targets.*;
+import com.grupomc426.Targets.Usuarios.Pessoa;
 import com.grupomc426.Targets.Usuarios.Usuario;
 
 /**
@@ -114,7 +114,6 @@ public class MenuLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void usuarioLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuarioLoginActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_usuarioLoginActionPerformed
 
     private void botaoVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoVoltarActionPerformed
@@ -124,9 +123,10 @@ public class MenuLogin extends javax.swing.JFrame {
     // TODO : Consertar Tela de Login
     private void botaoConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoConfirmarActionPerformed
         String usuario = usuarioLogin.getText();
-        String senha = senhaLogin.getText();
+        String senha = senhaLogin.getPassword().toString();
         
-        Usuario user = new Usuario(null, null, usuario, null, senha, true);
+        Pessoa pessoa = new Pessoa(usuario, null, null, null);
+        Usuario user = new Usuario(pessoa, senha, false);
         
         dispose();
     }//GEN-LAST:event_botaoConfirmarActionPerformed
