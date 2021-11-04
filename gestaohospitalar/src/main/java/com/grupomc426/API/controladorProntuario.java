@@ -1,23 +1,18 @@
 package com.grupomc426.API;
 
 import java.util.List;
-import java.time.LocalDateTime;
 
-import com.grupomc426.DataBase.HelperDB;
+import com.grupomc426.DataBase.ACAO;
+import com.grupomc426.DataBase.Helpers.HelperProntuario;
 import com.grupomc426.Targets.Atendimento.*;
 import com.grupomc426.Targets.Produtos.*;
 import com.grupomc426.Targets.Usuarios.*;
 
 public class controladorProntuario {
-    private HelperDB db;
+    private HelperProntuario db;
 
     public controladorProntuario() {
-        db = HelperDB.getDB();
-    }
-
-    public boolean registrarConsulta(Medico medico, Usuario pessoa, LocalDateTime horario) {
-        Consulta consulta = new Consulta(-1, medico, pessoa, null, horario);
-        return db.registrarConsulta(consulta);
+        db = HelperProntuario.getDB();
     }
 
     public boolean adicionarMedicamentos(int prontuarioID, List<Medicamento> medicamentos) {
@@ -38,11 +33,15 @@ public class controladorProntuario {
         return true;
     }
 
-    public boolean assinarProntuario(String prontuarioID, Medico medico) {
-        return db.assinarProntuario(prontuarioID, medico.getCrm());
+    public boolean assinarExame(String exameID, Medico medico) {
+        return db.assinarExame(exameID, medico.getCrm());
     }
 
     public Prontuario obterProntuario(int prontuarioID) {
         return db.obterProntuario(prontuarioID);
-    } 
+    }
+    
+    public boolean operacaoCadastro(ACAO operacao, Pessoa pessoa){
+        return db.operacaoCadastro(operacao, pessoa);
+    }
 }

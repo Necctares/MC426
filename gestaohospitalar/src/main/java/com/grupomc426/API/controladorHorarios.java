@@ -1,14 +1,14 @@
 package com.grupomc426.API;
 
-import com.grupomc426.DataBase.HelperDB;
+import com.grupomc426.DataBase.Helpers.HelperHorarios;
 import com.grupomc426.Targets.Atendimento.*;
 import com.grupomc426.Targets.Usuarios.*;
 
 public class controladorHorarios {
-    private HelperDB db;
+    private HelperHorarios db;
 
     public controladorHorarios() {
-        db = HelperDB.getDB();
+        db = HelperHorarios.getDB();
     }
 
     public boolean registrarHorario(Medico medico, java.time.LocalDateTime horario) {
