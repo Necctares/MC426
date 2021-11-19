@@ -1,7 +1,7 @@
 package com.grupomc426.DataBase;
 
 import java.util.Map;
-
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ProntuarioDB extends DataBase{
@@ -17,9 +17,31 @@ public class ProntuarioDB extends DataBase{
         closeAcess();
     }
 
+    public void adicionarUsuario(String usuarioValues) {
+        makeAcess();
+        String cmd = "INSERT INTO USUARIO VALUES " + usuarioValues;
+        try {
+            statement.executeUpdate(cmd);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        closeAcess();
+    }
+
     public void removerPessoa(String pessoaValues) {
         makeAcess();
         String cmd = "REMOVE FROM PESSOA " + "WHERE cpf = " + pessoaValues;
+        try {
+            statement.executeUpdate(cmd);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        closeAcess();
+    }
+
+    public void removerUsuario(String usuarioValues) {
+        makeAcess();
+        String cmd = "REMOVE FROM USUARIO WHERE id = " + usuarioValues;
         try {
             statement.executeUpdate(cmd);
         } catch (SQLException e) {
@@ -74,5 +96,24 @@ public class ProntuarioDB extends DataBase{
     public String obterProntuario(int prontuarioID) {
         String prontuario = null;
         return prontuario;
+    }
+
+    public String obterSenha(String id) {
+        String senha = null;
+        makeAcess();
+        String cmd = "SELECT senha FROM USUARIO WHERE id = " + id;
+
+        try {
+            ResultSet rs = statement.executeQuery(cmd);
+            
+            while(rs.next()) {
+                senha = rs.getString("senha");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+        closeAcess();
+        return senha;
     }
 }

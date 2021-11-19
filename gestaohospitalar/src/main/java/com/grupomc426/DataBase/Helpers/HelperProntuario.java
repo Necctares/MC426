@@ -8,7 +8,7 @@ import com.grupomc426.DataBase.ProntuarioDB;
 import com.grupomc426.Targets.Atendimento.Exame;
 import com.grupomc426.Targets.Atendimento.Prontuario;
 import com.grupomc426.Targets.Produtos.Medicamento;
-import com.grupomc426.Targets.Usuarios.Pessoa;
+import com.grupomc426.Targets.Usuarios.Usuario;
 
 public class HelperProntuario implements HelperDB {
     private ProntuarioDB db;
@@ -25,11 +25,6 @@ public class HelperProntuario implements HelperDB {
         return instance;
     }
 
-    /* TODO */
-    public boolean checkLogin(String id, String senha) {
-        return false;
-    }
-
     public boolean isDigit(String s) {
         for (int i = 0; i < s.length(); i++) {
             char ch = s.charAt(i);
@@ -39,17 +34,21 @@ public class HelperProntuario implements HelperDB {
         return true;
     }
 
-    public boolean operacaoCadastro(ACAO operacao, Pessoa pessoa) {
+    public boolean operacaoCadastro(ACAO operacao, Usuario usuario) {
         if (operacao == ACAO.ADICIONAR) {
-            if (isDigit(pessoa.getCPF()) && isDigit(pessoa.getTelefone())) {
-                String cadastro = "('" + pessoa.getNome() + "', '" + pessoa.getTelefone() + "', '" + pessoa.getCPF()
-                        + "', " + pessoa.getIdade() + ")";
+            if (isDigit(usuario.getCPF()) && isDigit(usuario.getTelefone()) && isDigit(usuario.getIdade())) {
+                String cadastro = "('" + usuario.getNome() + "', '" + usuario.getTelefone() + "', '" 
+                        + usuario.getCPF() + "', " + usuario.getIdade() + ")";
                 db.adicionarPessoa(cadastro);
+                cadastro = "('" + usuario.getID() + "', '" + usuario.getSenha() + "', '"
+                        + usuario.getEhFuncionario() + ")";
+                db.adicionarUsuario(cadastro);
                 return true;
             }
         } else if (operacao == ACAO.REMOVER) {
-            if (isDigit(pessoa.getCPF()) && isDigit(pessoa.getTelefone())) {
-                db.removerPessoa(pessoa.getCPF());
+            if (isDigit(usuario.getCPF()) && isDigit(usuario.getTelefone())) {
+                db.removerPessoa(usuario.getCPF());
+                db.removerUsuario(usuario.getID());
                 return true;
             }
         }
@@ -91,5 +90,15 @@ public class HelperProntuario implements HelperDB {
         Prontuario novoProntuario = null;
         // TODO
         return novoProntuario;
+    }
+
+    @Override
+    public boolean checkLogin(Usuario usuario) {
+        if (!usuario.getID().isEmpty() && !usuario.getSenha().isEmpty()) {
+            String senha = db.obterSenha(usuario.getID());
+            if (usuario.getSenha() == senha)
+                return true;
+        }
+        return false;
     }
 }

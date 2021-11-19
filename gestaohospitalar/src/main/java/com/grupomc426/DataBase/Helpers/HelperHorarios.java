@@ -9,6 +9,7 @@ import com.grupomc426.Targets.Atendimento.Agenda;
 import com.grupomc426.Targets.Atendimento.Consulta;
 import com.grupomc426.Targets.Usuarios.Medico;
 import com.grupomc426.Targets.Usuarios.Pessoa;
+import com.grupomc426.Targets.Usuarios.Usuario;
 
 public class HelperHorarios implements HelperDB {
     private HorariosDB db;
@@ -58,5 +59,11 @@ public class HelperHorarios implements HelperDB {
 
     public Agenda obterAgenda(Medico medico) {
         return null;
+    }
+
+    @Override
+    public boolean checkLogin(Usuario usuario) {
+        // TODO Auto-generated method stub
+        return false;
     }
 }

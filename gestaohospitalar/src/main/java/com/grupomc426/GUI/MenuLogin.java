@@ -5,6 +5,7 @@
  */
 package com.grupomc426.GUI;
 
+import com.grupomc426.API.controladorProntuario;
 import com.grupomc426.Targets.Usuarios.Pessoa;
 import com.grupomc426.Targets.Usuarios.Usuario;
 
@@ -128,6 +129,9 @@ public class MenuLogin extends javax.swing.JFrame {
         Pessoa pessoa = new Pessoa(usuario, null, null, null);
         Usuario user = new Usuario(pessoa, senha, false);
         
+        controladorProntuario prontuario = new controladorProntuario();
+        prontuario.checkLogin(usuario);
+
         dispose();
     }//GEN-LAST:event_botaoConfirmarActionPerformed
 

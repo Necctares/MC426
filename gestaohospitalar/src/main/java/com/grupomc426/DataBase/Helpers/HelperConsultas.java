@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.grupomc426.DataBase.ConsultaDB;
 import com.grupomc426.Targets.Atendimento.Consulta;
+import com.grupomc426.Targets.Usuarios.Usuario;
 
 public class HelperConsultas implements HelperDB {
     private ConsultaDB db;
@@ -33,5 +34,11 @@ public class HelperConsultas implements HelperDB {
         mapaConsulta.put("usuario", consulta.getUsuario().getCPF());
         mapaConsulta.put("horario", consulta.getHorario().toString());
         return db.adicionarConsulta(mapaConsulta);
+    }
+
+    @Override
+    public boolean checkLogin(Usuario usuario) {
+        // TODO Auto-generated method stub
+        return false;
     }
 }
