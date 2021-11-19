@@ -8,7 +8,6 @@ import com.grupomc426.DataBase.ProntuarioDB;
 import com.grupomc426.Targets.Atendimento.Exame;
 import com.grupomc426.Targets.Atendimento.Prontuario;
 import com.grupomc426.Targets.Produtos.Medicamento;
-import com.grupomc426.Targets.Usuarios.Pessoa;
 import com.grupomc426.Targets.Usuarios.Usuario;
 
 public class HelperProntuario implements HelperDB {
@@ -24,11 +23,6 @@ public class HelperProntuario implements HelperDB {
             instance = new HelperProntuario();
         }
         return instance;
-    }
-
-    /* TODO */
-    public boolean checkLogin(String id, String senha) {
-        return false;
     }
 
     public boolean isDigit(String s) {
@@ -96,5 +90,15 @@ public class HelperProntuario implements HelperDB {
         Prontuario novoProntuario = null;
         // TODO
         return novoProntuario;
+    }
+
+    @Override
+    public boolean checkLogin(Usuario usuario) {
+        if (!usuario.getID().isEmpty() && !usuario.getSenha().isEmpty()) {
+            String senha = db.obterSenha(usuario.getID());
+            if (usuario.getSenha() == senha)
+                return true;
+        }
+        return false;
     }
 }

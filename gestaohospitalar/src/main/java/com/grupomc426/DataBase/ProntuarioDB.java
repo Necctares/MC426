@@ -1,7 +1,7 @@
 package com.grupomc426.DataBase;
 
 import java.util.Map;
-
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ProntuarioDB extends DataBase{
@@ -96,5 +96,24 @@ public class ProntuarioDB extends DataBase{
     public String obterProntuario(int prontuarioID) {
         String prontuario = null;
         return prontuario;
+    }
+
+    public String obterSenha(String id) {
+        String senha = null;
+        makeAcess();
+        String cmd = "SELECT senha FROM USUARIO WHERE id = " + id;
+
+        try {
+            ResultSet rs = statement.executeQuery(cmd);
+            
+            while(rs.next()) {
+                senha = rs.getString("senha");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+        closeAcess();
+        return senha;
     }
 }

@@ -1,6 +1,8 @@
 package com.grupomc426.DataBase.Helpers;
 
+import com.grupomc426.Targets.Usuarios.*;
+
 interface HelperDB {
 
-    public boolean checkLogin(String id, String senha);
+    public boolean checkLogin(Usuario usuario);
 }

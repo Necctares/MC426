@@ -44,4 +44,8 @@ public class controladorProntuario {
     public boolean operacaoCadastro(ACAO operacao, Usuario usuario){
         return db.operacaoCadastro(operacao, usuario);
     }
+
+    public boolean checkLogin(Usuario usuario) {
+        return db.checkLogin(usuario);
+    }
 }
