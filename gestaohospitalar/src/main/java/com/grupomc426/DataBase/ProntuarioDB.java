@@ -17,9 +17,31 @@ public class ProntuarioDB extends DataBase{
         closeAcess();
     }
 
+    public void adicionarUsuario(String usuarioValues) {
+        makeAcess();
+        String cmd = "INSERT INTO USUARIO VALUES " + usuarioValues;
+        try {
+            statement.executeUpdate(cmd);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        closeAcess();
+    }
+
     public void removerPessoa(String pessoaValues) {
         makeAcess();
         String cmd = "REMOVE FROM PESSOA " + "WHERE cpf = " + pessoaValues;
+        try {
+            statement.executeUpdate(cmd);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        closeAcess();
+    }
+
+    public void removerUsuario(String usuarioValues) {
+        makeAcess();
+        String cmd = "REMOVE FROM USUARIO WHERE id = " + usuarioValues;
         try {
             statement.executeUpdate(cmd);
         } catch (SQLException e) {
