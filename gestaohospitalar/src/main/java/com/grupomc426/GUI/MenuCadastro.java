@@ -185,18 +185,11 @@ public class MenuCadastro extends javax.swing.JFrame {
         String cpf = cpfCadastro.getText();
         String idade = idadeCadastro.getText();
         String senha = senhaCadastro.getPassword().toString();
-        boolean ehFuncionario;
 
         controladorProntuario prontuario = new controladorProntuario();
         
-        if (tipo.compareToIgnoreCase("Paciente") == 0) {
-            ehFuncionario = false;
-        } else {
-            ehFuncionario = true;
-        }
-        
         Pessoa novaPessoa = new Pessoa(usuario, telefone, cpf, idade);
-        Usuario novoUsuario = new Usuario(novaPessoa, senha, ehFuncionario);
+        Usuario novoUsuario = new Usuario(novaPessoa, senha, false);
         prontuario.operacaoCadastro(ACAO.ADICIONAR, novoUsuario);
         
         dispose();
@@ -268,5 +261,53 @@ public class MenuCadastro extends javax.swing.JFrame {
     private javax.swing.JTextField telefoneCadastro;
     private javax.swing.JComboBox<String> tipoCadastro;
     private javax.swing.JTextField usuarioCadastro;
-    // End of variables declaration                   
+    // End of variables declaration
+                  
+    public javax.swing.JTextField getCpfCadastro() {
+        return cpfCadastro;
+    }
+
+    public void setCpfCadastro(javax.swing.JTextField cpfCadastro) {
+        this.cpfCadastro = cpfCadastro;
+    }
+
+    public javax.swing.JTextField getIdadeCadastro() {
+        return idadeCadastro;
+    }
+
+    public void setIdadeCadastro(javax.swing.JTextField idadeCadastro) {
+        this.idadeCadastro = idadeCadastro;
+    }
+
+    public javax.swing.JPasswordField getSenhaCadastro() {
+        return senhaCadastro;
+    }
+
+    public void setSenhaCadastro(javax.swing.JPasswordField senhaCadastro) {
+        this.senhaCadastro = senhaCadastro;
+    }
+
+    public javax.swing.JTextField getTelefoneCadastro() {
+        return telefoneCadastro;
+    }
+
+    public void setTelefoneCadastro(javax.swing.JTextField telefoneCadastro) {
+        this.telefoneCadastro = telefoneCadastro;
+    }
+
+    public javax.swing.JComboBox<String> getTipoCadastro() {
+        return tipoCadastro;
+    }
+
+    public void setTipoCadastro(javax.swing.JComboBox<String> tipoCadastro) {
+        this.tipoCadastro = tipoCadastro;
+    }
+
+    public javax.swing.JTextField getUsuarioCadastro() {
+        return usuarioCadastro;
+    }
+
+    public void setUsuarioCadastro(javax.swing.JTextField usuarioCadastro) {
+        this.usuarioCadastro = usuarioCadastro;
+    }
 }

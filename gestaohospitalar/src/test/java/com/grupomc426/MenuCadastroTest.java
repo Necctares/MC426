@@ -2,11 +2,9 @@ package com.grupomc426;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestTemplate;
-
 import static org.junit.jupiter.api.Assertions.*;
-
 import java.lang.reflect.Executable;
-
+import javax.swing.JTextField;
 import com.grupomc426.GUI.MenuCadastro;
 
 class MenuCadastroTest {
@@ -16,9 +14,7 @@ class MenuCadastroTest {
         String nomeTeste = "Jose da Silva";
 
         MenuCadastro menu = new MenuCadastro();
-        JTextField usuarioCadastro = menu.getComponent(0);
-        usuarioCadastro.setText(nomeTeste);
-        assertDoesNotThrow(executable);
+        menu.getUsuarioCadastro().setText(nomeTeste);
     }
 
     @Test
@@ -36,13 +32,11 @@ class MenuCadastroTest {
     @Test
     void telefoneCadastroValido() {
         String telefoneTeste = "11987654321";
-
     }
 
     @Test
     void telefoneCadastroComSimbolos() {
-        String telefoneTeste = "(11) 98765-4321";
-        
+        String telefoneTeste = "(11) 98765-4321";        
     }
 
     @Test
@@ -60,31 +54,26 @@ class MenuCadastroTest {
     @Test
     void cpfCadastroValido() {
         String cpfTeste = "23640102843";
-
     }
 
     @Test
     void cpfCadastroComSimbolos() {
-        String cpfTeste = "236.401.028-43";
-        
+        String cpfTeste = "236.401.028-43";        
     }
 
     @Test
     void cpfCadastroMenosDe11Digitos() {
-        String cpfTeste = "236401028";
-        
+        String cpfTeste = "236401028";        
     }
     
     @Test
     void cpfCadastroMaisDe11Digitos() {
-        String cpfTeste = "236401028430";
-        
+        String cpfTeste = "236401028430";        
     }
 
     @Test
     void cpfCadastroCPFImpossivel() {
-        String cpfTeste = "11111111111";
-        
+        String cpfTeste = "11111111111";        
     }
 
 
@@ -109,11 +98,6 @@ class MenuCadastroTest {
     @Test
     void senhaCadastroValido() {
         String senha = "abcd1234";
-
-        MenuCadastro menu = new MenuCadastro();
-        JTextField senhaCadastro = menu.getComponent(0);
-        senhaCadastro.setText(senha);
-        assertDoesNotThrow();
     }
 
     @Test

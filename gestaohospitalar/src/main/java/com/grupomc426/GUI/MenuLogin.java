@@ -130,7 +130,7 @@ public class MenuLogin extends javax.swing.JFrame {
         Usuario usuario = new Usuario(pessoa, senha, false);
         
         controladorProntuario prontuario = new controladorProntuario();
-        prontuario.checkLogin(usuario);
+        prontuario.tentarLogin(usuario);
 
         dispose();
     }//GEN-LAST:event_botaoConfirmarActionPerformed

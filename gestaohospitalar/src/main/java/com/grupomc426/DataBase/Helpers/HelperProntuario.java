@@ -14,9 +14,13 @@ public class HelperProntuario implements HelperDB {
     private ProntuarioDB db;
     private static HelperProntuario instance = null;
 
-    //Constantes
+    // Constantes
     private final int MAX_CARACTER_CPF = 11;
     private final int MAX_CARACTER_NOME = 100;
+    private final int MAX_CARACTER_TELEFONE = 11;
+    private final int MAX_CARACTER_ANONASCIMENTO = 4;
+    private final int MAX_CARACTER_SENHA = 30;
+    private final int MIN_CARACTER_SENHA = 8;
 
     private HelperProntuario() {
         db = new ProntuarioDB();
@@ -38,14 +42,14 @@ public class HelperProntuario implements HelperDB {
         return true;
     }
 
-    public boolean operacaoCadastro(ACAO operacao, Usuario usuario) {
+    public boolean operacaoCadastro(ACAO operacao, Usuario usuario) throws IllegalArgumentException {
         if (operacao == ACAO.ADICIONAR) {
             if (ehUsuarioValido(usuario)) {
-                String cadastro = "('" + usuario.getNome() + "', '" + usuario.getTelefone() + "', '" 
-                        + usuario.getCPF() + "', " + usuario.getIdade() + ")";
+                String cadastro = "('" + usuario.getNome() + "', '" + usuario.getTelefone() + "', '" + usuario.getCPF()
+                        + "', " + usuario.getAnoNascimento() + ")";
                 db.adicionarPessoa(cadastro);
-                cadastro = "('" + usuario.getID() + "', '" + usuario.getSenha() + "', '"
-                        + usuario.getEhFuncionario() + ")";
+                cadastro = "('" + usuario.getID() + "', '" + usuario.getSenha() + "', '" + usuario.getEhFuncionario()
+                        + ")";
                 db.adicionarUsuario(cadastro);
                 return true;
             }
@@ -97,7 +101,7 @@ public class HelperProntuario implements HelperDB {
     }
 
     @Override
-    public boolean checkLogin(Usuario usuario) {
+    public boolean tentarLogin(Usuario usuario) {
         if (!usuario.getID().isEmpty() && !usuario.getSenha().isEmpty()) {
             String senha = db.obterSenha(usuario.getID());
             if (usuario.getSenha() == senha)
@@ -106,24 +110,47 @@ public class HelperProntuario implements HelperDB {
         return false;
     }
 
-    private boolean ehUsuarioValido(Usuario usuario) {
-        if (ehCPFValido(usuario.getCPF()) && ehNomeValido(usuario.getNome())){
+    private boolean ehUsuarioValido(Usuario usuario) throws IllegalArgumentException {
+        if (ehCPFValido(usuario.getCPF()) && ehNomeValido(usuario.getNome()) && ehTelefoneValido(usuario.getTelefone())
+                && ehAnoDeNascimentoValido(usuario.getAnoNascimento()) && ehSenhaValida(usuario.getSenha())) {
             return true;
         }
         return false;
     }
 
-    private boolean ehCPFValido(String CPF) {
-        if(isDigit(CPF) && CPF.length() <= MAX_CARACTER_CPF) {
+    private boolean ehCPFValido(String CPF) throws IllegalArgumentException {
+        if (isDigit(CPF) && CPF.length() == MAX_CARACTER_CPF) {
             return true;
         }
-        return false;
+        throw new IllegalArgumentException("Parametros do CPF sao invalidos, por favor, digite corretamente.");
     }
 
-    private boolean ehNomeValido(String nome) {
-        if(isDigit(nome) && nome.length() <= MAX_CARACTER_NOME) {
+    private boolean ehNomeValido(String nome) throws IllegalArgumentException {
+        if (nome.matches("[a-zA-Z]+") && nome.length() > MAX_CARACTER_NOME) {
             return true;
         }
-        return false;
+        throw new IllegalArgumentException("Parametros do nome sao invalidos, por favor, digite corretamente.");
+    }
+
+    private boolean ehTelefoneValido(String telefone) throws IllegalArgumentException {
+        if (isDigit(telefone) && telefone.length() == MAX_CARACTER_TELEFONE) {
+            return true;
+        }
+        throw new IllegalArgumentException("Parametros do telefone sao invalidos, por favor, digite corretamente.");
+    }
+
+    private boolean ehAnoDeNascimentoValido(String anoNascimento) throws IllegalArgumentException {
+        if (isDigit(anoNascimento) && anoNascimento.length() == MAX_CARACTER_ANONASCIMENTO) {
+            return true;
+        }
+        throw new IllegalArgumentException("Ano de nascimento invalido, por favor, digite corretamente.");
+    }
+
+    private boolean ehSenhaValida(String senha) throws IllegalArgumentException {
+        if (senha.matches("^[a-zA-Z0-9]*$") && senha.length() <= MAX_CARACTER_SENHA
+                && senha.length() >= MIN_CARACTER_SENHA) {
+            return true;
+        }
+        throw new IllegalArgumentException("Parametros da senha sao invalidos, por favor, digite corretamente.");
     }
 }

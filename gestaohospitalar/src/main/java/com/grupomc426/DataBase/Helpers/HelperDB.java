@@ -4,5 +4,5 @@ import com.grupomc426.Targets.Usuarios.*;
 
 interface HelperDB {
 
-    public boolean checkLogin(Usuario usuario);
+    public boolean tentarLogin(Usuario usuario);
 }
