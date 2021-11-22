@@ -14,6 +14,10 @@ public class HelperProntuario implements HelperDB {
     private ProntuarioDB db;
     private static HelperProntuario instance = null;
 
+    //Constantes
+    private final int MAX_CARACTER_CPF = 11;
+    private final int MAX_CARACTER_NOME = 100;
+
     private HelperProntuario() {
         db = new ProntuarioDB();
     }
@@ -36,7 +40,7 @@ public class HelperProntuario implements HelperDB {
 
     public boolean operacaoCadastro(ACAO operacao, Usuario usuario) {
         if (operacao == ACAO.ADICIONAR) {
-            if (isDigit(usuario.getCPF()) && isDigit(usuario.getTelefone()) && isDigit(usuario.getIdade())) {
+            if (ehUsuarioValido(usuario)) {
                 String cadastro = "('" + usuario.getNome() + "', '" + usuario.getTelefone() + "', '" 
                         + usuario.getCPF() + "', " + usuario.getIdade() + ")";
                 db.adicionarPessoa(cadastro);
@@ -98,6 +102,27 @@ public class HelperProntuario implements HelperDB {
             String senha = db.obterSenha(usuario.getID());
             if (usuario.getSenha() == senha)
                 return true;
+        }
+        return false;
+    }
+
+    private boolean ehUsuarioValido(Usuario usuario) {
+        if (ehCPFValido(usuario.getCPF()) && ehNomeValido(usuario.getNome())){
+            return true;
+        }
+        return false;
+    }
+
+    private boolean ehCPFValido(String CPF) {
+        if(isDigit(CPF) && CPF.length() <= MAX_CARACTER_CPF) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean ehNomeValido(String nome) {
+        if(isDigit(nome) && nome.length() <= MAX_CARACTER_NOME) {
+            return true;
         }
         return false;
     }

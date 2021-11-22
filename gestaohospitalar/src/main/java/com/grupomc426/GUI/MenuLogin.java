@@ -123,11 +123,11 @@ public class MenuLogin extends javax.swing.JFrame {
 
     // TODO : Consertar Tela de Login
     private void botaoConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoConfirmarActionPerformed
-        String usuario = usuarioLogin.getText();
+        String nome = usuarioLogin.getText();
         String senha = senhaLogin.getPassword().toString();
         
-        Pessoa pessoa = new Pessoa(usuario, null, null, null);
-        Usuario user = new Usuario(pessoa, senha, false);
+        Pessoa pessoa = new Pessoa(nome, null, null, null);
+        Usuario usuario = new Usuario(pessoa, senha, false);
         
         controladorProntuario prontuario = new controladorProntuario();
         prontuario.checkLogin(usuario);
