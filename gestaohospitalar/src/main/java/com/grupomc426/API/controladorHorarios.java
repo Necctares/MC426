@@ -18,6 +18,7 @@ public class controladorHorarios {
     public boolean reservarHorario(Medico medico, java.time.LocalDateTime horario, Pessoa pessoa) {
         return db.reservarHorario(medico, horario, pessoa);
     }
+    
     //OBTER AGENDA É PEGAR A TABELA DO MEDICO E DOS HORARIOS
     public Agenda obterAgenda(Medico medico) {
         return db.obterAgenda(medico);

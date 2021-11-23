@@ -16,7 +16,7 @@ public class controladorHorariosTest {
         Pessoa pessoaMedico = new Pessoa("Medico Teste", "11987654321", "11111111111", "1970");
         Usuario usuario = new Usuario(pessoaMedico, "senha123", true);
         Medico medico = new Medico(usuario, "12345", null);
-        LocalDateTime horario = LocalDateTime.of(2020, 12, 12, 9, 30, 00);
+        LocalDateTime horario = LocalDateTime.of(2021, 12, 21, 8, 15, 00);
 
         controladorHorarios controlador = new controladorHorarios();
         controlador.registrarHorario(medico, horario);
@@ -34,7 +34,7 @@ public class controladorHorariosTest {
         Pessoa pessoaMedico = new Pessoa("Medico Teste", "11987654321", "11111111111", "1970");
         Usuario usuario = new Usuario(pessoaMedico, "senha123", true);
         Medico medico = new Medico(usuario, "12345", null);
-        LocalDateTime horario = LocalDateTime.of(2020, 12, 12, 9, 30, 00);
+        LocalDateTime horario = LocalDateTime.of(2021, 12, 21, 8, 15, 00);
 
         controladorHorarios controlador = new controladorHorarios();
         controlador.registrarHorario(medico, horario);
@@ -51,7 +51,7 @@ public class controladorHorariosTest {
         Pessoa pessoaMedico = new Pessoa("Medico Teste", "11987654321", "11111111111", "1970");
         Usuario usuario = new Usuario(pessoaMedico, "senha123", true);
         Medico medico = new Medico(usuario, "12345", null);
-        LocalDateTime horario = LocalDateTime.of(2008, 12, 12, 9, 30, 00);
+        LocalDateTime horario = LocalDateTime.of(2008, 04, 01, 12, 42, 25);
 
         controladorHorarios controlador = new controladorHorarios();
         boolean resultado = controlador.registrarHorario(medico, horario);
