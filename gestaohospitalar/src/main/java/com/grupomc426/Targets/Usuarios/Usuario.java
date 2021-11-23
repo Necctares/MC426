@@ -7,7 +7,7 @@ public class Usuario extends Pessoa{
     private boolean ehFuncionario;
 
     public Usuario(Pessoa pessoa, String senha, boolean ehFuncionario) {
-        super(pessoa.getNome(), pessoa.getTelefone(), pessoa.getCPF(), pessoa.getIdade());
+        super(pessoa.getNome(), pessoa.getTelefone(), pessoa.getCPF(), pessoa.getAnoNascimento());
         this.id = pessoa.getCPF();
         this.senha = senha;
         this.ehFuncionario = ehFuncionario;

@@ -37,7 +37,7 @@ public class HelperConsultas implements HelperDB {
     }
 
     @Override
-    public boolean checkLogin(Usuario usuario) {
+    public boolean tentarLogin(Usuario usuario) {
         // TODO Auto-generated method stub
         return false;
     }

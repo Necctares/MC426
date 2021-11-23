@@ -42,19 +42,27 @@ public class HelperHorarios implements HelperDB {
 
     // TODO controladorHorarios
     public boolean registrarHorario(Medico medico, LocalDateTime horario) {
-        Map<String, String> mapaHorario = new HashMap<String, String>();
-        mapaHorario.put("horario", horario.toString());
-        mapaHorario.put("crm", medico.getCrm());
-        mapaHorario.put("cpf", null);
-        return db.adicionarHorario(mapaHorario);
+        if (horario.isAfter(LocalDateTime.now())) {
+            Map<String, String> mapaHorario = new HashMap<String, String>();
+            mapaHorario.put("horario", horario.toString());
+            mapaHorario.put("crm", medico.getCrm());
+            mapaHorario.put("cpf", null);
+            return db.adicionarHorario(mapaHorario);
+        } else {
+            return false;
+        }
     }
 
     public boolean reservarHorario(Medico medico, LocalDateTime horario, Pessoa paciente) {
-        Map<String, String> mapaHorario = new HashMap<String, String>();
-        mapaHorario.put("horario", horario.toString());
-        mapaHorario.put("crm", medico.getCrm());
-        mapaHorario.put("cpf", paciente.getCPF());
-        return db.removerHorario(mapaHorario);
+        if (horario.isAfter(LocalDateTime.now())) {
+            Map<String, String> mapaHorario = new HashMap<String, String>();
+            mapaHorario.put("horario", horario.toString());
+            mapaHorario.put("crm", medico.getCrm());
+            mapaHorario.put("cpf", paciente.getCPF());
+            return db.reservarHorario(mapaHorario);
+        } else {
+            return false;
+        }
     }
 
     public Agenda obterAgenda(Medico medico) {
@@ -62,7 +70,7 @@ public class HelperHorarios implements HelperDB {
     }
 
     @Override
-    public boolean checkLogin(Usuario usuario) {
+    public boolean tentarLogin(Usuario usuario) {
         // TODO Auto-generated method stub
         return false;
     }

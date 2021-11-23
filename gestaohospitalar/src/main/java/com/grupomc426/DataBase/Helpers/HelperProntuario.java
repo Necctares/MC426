@@ -13,9 +13,22 @@ import com.grupomc426.Targets.Usuarios.Usuario;
 public class HelperProntuario implements HelperDB {
     private ProntuarioDB db;
     private static HelperProntuario instance = null;
+    // TODO
+    // Mock para substituir temporariamente o DB
+    private Map<String, String> mockDatabase = new HashMap<String, String>();
+
+    // Constantes
+    private final int MAX_CARACTER_CPF = 11;
+    private final int MAX_CARACTER_NOME = 100;
+    private final int MAX_CARACTER_TELEFONE = 11;
+    private final int MAX_CARACTER_ANONASCIMENTO = 4;
+    private final int MAX_CARACTER_SENHA = 30;
+    private final int MIN_CARACTER_SENHA = 8;
 
     private HelperProntuario() {
         db = new ProntuarioDB();
+        mockDatabase.put("11111111111", "12345678");
+        mockDatabase.put("01234567890", "87654321");
     }
 
     public static HelperProntuario getDB() {
@@ -34,14 +47,14 @@ public class HelperProntuario implements HelperDB {
         return true;
     }
 
-    public boolean operacaoCadastro(ACAO operacao, Usuario usuario) {
+    public boolean operacaoCadastro(ACAO operacao, Usuario usuario) throws IllegalArgumentException {
         if (operacao == ACAO.ADICIONAR) {
-            if (isDigit(usuario.getCPF()) && isDigit(usuario.getTelefone()) && isDigit(usuario.getIdade())) {
-                String cadastro = "('" + usuario.getNome() + "', '" + usuario.getTelefone() + "', '" 
-                        + usuario.getCPF() + "', " + usuario.getIdade() + ")";
+            if (ehUsuarioValido(usuario)) {
+                String cadastro = "('" + usuario.getNome() + "', '" + usuario.getTelefone() + "', '" + usuario.getCPF()
+                        + "', " + usuario.getAnoNascimento() + ")";
                 db.adicionarPessoa(cadastro);
-                cadastro = "('" + usuario.getID() + "', '" + usuario.getSenha() + "', '"
-                        + usuario.getEhFuncionario() + ")";
+                cadastro = "('" + usuario.getID() + "', '" + usuario.getSenha() + "', '" + usuario.getEhFuncionario()
+                        + ")";
                 db.adicionarUsuario(cadastro);
                 return true;
             }
@@ -52,11 +65,7 @@ public class HelperProntuario implements HelperDB {
                 return true;
             }
         }
-        return false;
-        /*
-         * quando colocar detecçao de erro no GUI para telefone e cpf serem apenas
-         * numeros tirar os daqui
-         */
+        throw new IllegalArgumentException("Falha ao conectar ao Banco de Dados!");
     }
 
     public boolean adicionarMedicamento(Medicamento medicamento) {
@@ -93,12 +102,76 @@ public class HelperProntuario implements HelperDB {
     }
 
     @Override
-    public boolean checkLogin(Usuario usuario) {
-        if (!usuario.getID().isEmpty() && !usuario.getSenha().isEmpty()) {
-            String senha = db.obterSenha(usuario.getID());
-            if (usuario.getSenha() == senha)
-                return true;
+    public boolean tentarLogin(Usuario usuario) throws IllegalArgumentException {
+        // TODO Implementar Parte do DB
+        if (usuarioExiste(usuario) && senhaEstaCorreta(usuario))
+            return true;
+        else
+            return false;
+    }
+
+    private boolean usuarioExiste (Usuario usuario) throws IllegalArgumentException {
+        //MOCK
+        if (mockDatabase.containsKey(usuario.getID())) {
+            return true;
+        }
+        else {
+            throw new IllegalArgumentException("Usuário não cadastrado!");
+        }
+    }
+
+    private boolean senhaEstaCorreta (Usuario usuario) throws IllegalArgumentException {
+        //MOCK
+        String senha = mockDatabase.get(usuario.getID());
+        //String senha = db.obterSenha(usuario.getID());
+        if (usuario.getSenha().equals(senha))
+            return true;
+        throw new IllegalArgumentException("Senha incorreta!");
+    }
+
+    private boolean ehUsuarioValido(Usuario usuario) throws IllegalArgumentException {
+        if (ehNomeValido(usuario.getNome()) && ehTelefoneValido(usuario.getTelefone()) && ehCPFValido(usuario.getCPF())
+                && ehAnoDeNascimentoValido(usuario.getAnoNascimento()) && ehSenhaValida(usuario.getSenha())) {
+            return true;
         }
         return false;
+    }
+
+    private boolean ehNomeValido(String nome) throws IllegalArgumentException {
+        if (nome.matches("[a-zA-Z ]+") && nome.length() <= MAX_CARACTER_NOME) {
+            return true;
+        }
+        throw new IllegalArgumentException("Nome inválido! Use apenas letras e espaço.");
+    }
+
+    private boolean ehTelefoneValido(String telefone) throws IllegalArgumentException {
+        if (isDigit(telefone) && telefone.length() == MAX_CARACTER_TELEFONE) {
+            return true;
+        }
+        throw new IllegalArgumentException(
+                "Telefone inválido! Inclua seu DDD e número de telefone, e digite apenas números.");
+    }
+
+    private boolean ehCPFValido(String CPF) throws IllegalArgumentException {
+        if (isDigit(CPF) && CPF.length() == MAX_CARACTER_CPF) {
+            return true;
+        }
+        throw new IllegalArgumentException("CPF inválido! Digite apenas os 11 números do seu CPF.");
+    }
+
+    private boolean ehAnoDeNascimentoValido(String anoNascimento) throws IllegalArgumentException {
+        if (isDigit(anoNascimento) && anoNascimento.length() == MAX_CARACTER_ANONASCIMENTO) {
+            return true;
+        }
+        throw new IllegalArgumentException("Ano inválido! Digite apenas seu ano de nascimento.");
+    }
+
+    private boolean ehSenhaValida(String senha) throws IllegalArgumentException {
+        if (senha.matches("^[a-zA-Z0-9]*$") && senha.length() <= MAX_CARACTER_SENHA
+                && senha.length() >= MIN_CARACTER_SENHA) {
+            return true;
+        }
+        throw new IllegalArgumentException(
+                "Senha inválida! Escolha uma senha com pelo menos 8 caracteres e até no máximo 30, podendo usar letras ou números.");
     }
 }

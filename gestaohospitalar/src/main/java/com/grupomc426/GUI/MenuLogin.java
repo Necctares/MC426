@@ -122,17 +122,30 @@ public class MenuLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoVoltarActionPerformed
 
     // TODO : Consertar Tela de Login
-    private void botaoConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoConfirmarActionPerformed
-        String usuario = usuarioLogin.getText();
-        String senha = senhaLogin.getPassword().toString();
+    public String botaoConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoConfirmarActionPerformed
+        String cpf = usuarioLogin.getText();
+        String senha = senhaLogin.getText();
         
-        Pessoa pessoa = new Pessoa(usuario, null, null, null);
-        Usuario user = new Usuario(pessoa, senha, false);
+        Pessoa pessoa = new Pessoa(null, null, cpf, null);
+        Usuario usuario = new Usuario(pessoa, senha, false);
         
         controladorProntuario prontuario = new controladorProntuario();
-        prontuario.checkLogin(usuario);
+        try {
+            prontuario.tentarLogin(usuario);
+            dispose();
+            return "Ok";
+        } catch (IllegalArgumentException erro) {
+            String mensagem = erro.getMessage();
+            TelaErroGenerica telaErro = new TelaErroGenerica(mensagem);
+            telaErro.setVisible(true);
+            return mensagem;
+        } catch (Exception e) {
+            // TODO Implementar Throws Banco de Dados
+            TelaErroGenerica telaErro = new TelaErroGenerica("Falha ao conectar ao Banco de Dados!");
+            telaErro.setVisible(true);
+            return "Ok";
+        }
 
-        dispose();
     }//GEN-LAST:event_botaoConfirmarActionPerformed
 
     /**
@@ -179,4 +192,19 @@ public class MenuLogin extends javax.swing.JFrame {
     private javax.swing.JPasswordField senhaLogin;
     private javax.swing.JTextField usuarioLogin;
     // End of variables declaration//GEN-END:variables
+    public javax.swing.JPasswordField getSenhaLogin() {
+        return senhaLogin;
+    }
+
+    public void setSenhaLogin(javax.swing.JPasswordField senhaLogin) {
+        this.senhaLogin = senhaLogin;
+    }
+
+    public javax.swing.JTextField getUsuarioLogin() {
+        return usuarioLogin;
+    }
+
+    public void setUsuarioLogin(javax.swing.JTextField usuarioLogin) {
+        this.usuarioLogin = usuarioLogin;
+    }
 }

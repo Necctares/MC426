@@ -41,11 +41,11 @@ public class controladorProntuario {
         return db.obterProntuario(prontuarioID);
     }
     
-    public boolean operacaoCadastro(ACAO operacao, Usuario usuario){
+    public boolean operacaoCadastro(ACAO operacao, Usuario usuario) throws IllegalArgumentException {
         return db.operacaoCadastro(operacao, usuario);
     }
 
-    public boolean checkLogin(Usuario usuario) {
-        return db.checkLogin(usuario);
+    public boolean tentarLogin(Usuario usuario) {
+        return db.tentarLogin(usuario);
     }
 }

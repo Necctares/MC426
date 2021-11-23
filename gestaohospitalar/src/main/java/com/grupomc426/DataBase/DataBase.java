@@ -56,7 +56,7 @@ public class DataBase {
 
     private void startTables() {
         makeAcess();
-        String create_pessoa = "CREATE TABLE IF NOT EXISTS PESSOA " + "(nome VARCHAR(100), " + " telefone VARCHAR(13), "
+        String create_pessoa = "CREATE TABLE IF NOT EXISTS PESSOA " + "(nome VARCHAR(100), " + " telefone VARCHAR(11), "
                 + "cpf VARCHAR(13) not NULL, " + " age INTEGER, " + " PRIMARY KEY ( cpf ))";
         String create_usuario = "CREATE TABLE IF NOT EXISTS USUARIO "
                 + "(id INTEGER not NULL, senha VARCHAR(30) not NULL, ehFuncionario TINYINT, PRIMARY KEY(id))";
@@ -120,5 +120,10 @@ public class DataBase {
         statement = null;
         connection = null;
         System.out.println("Conexao encerrada com sucesso.");
+    }
+
+    // TODO
+    boolean checarLogin(){
+        return false;
     }
 }
