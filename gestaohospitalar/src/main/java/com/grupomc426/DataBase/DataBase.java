@@ -121,4 +121,9 @@ public class DataBase {
         connection = null;
         System.out.println("Conexao encerrada com sucesso.");
     }
+
+    // TODO
+    boolean checarLogin(){
+        return false;
+    }
 }

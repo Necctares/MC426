@@ -13,6 +13,9 @@ import com.grupomc426.Targets.Usuarios.Usuario;
 public class HelperProntuario implements HelperDB {
     private ProntuarioDB db;
     private static HelperProntuario instance = null;
+    // TODO
+    // Mock para substituir temporariamente o DB
+    private Map<String, String> mockDatabase = new HashMap<String, String>();
 
     // Constantes
     private final int MAX_CARACTER_CPF = 11;
@@ -24,6 +27,8 @@ public class HelperProntuario implements HelperDB {
 
     private HelperProntuario() {
         db = new ProntuarioDB();
+        mockDatabase.put("11111111111", "12345678");
+        mockDatabase.put("01234567890", "87654321");
     }
 
     public static HelperProntuario getDB() {
@@ -97,21 +102,36 @@ public class HelperProntuario implements HelperDB {
     }
 
     @Override
-    public boolean tentarLogin(Usuario usuario) {
-        if (!usuario.getID().isEmpty() && !usuario.getSenha().isEmpty()) {
-            String senha = db.obterSenha(usuario.getID());
-            if (usuario.getSenha() == senha)
-                return true;
+    public boolean tentarLogin(Usuario usuario) throws IllegalArgumentException {
+        // TODO Implementar Parte do DB
+        if (usuarioExiste(usuario) && senhaEstaCorreta(usuario))
+            return true;
+        else
+            return false;
+    }
+
+    private boolean usuarioExiste (Usuario usuario) throws IllegalArgumentException {
+        //MOCK
+        if (mockDatabase.containsKey(usuario.getID())) {
+            return true;
         }
-        return false;
+        else {
+            throw new IllegalArgumentException("Usuário não cadastrado!");
+        }
+    }
+
+    private boolean senhaEstaCorreta (Usuario usuario) throws IllegalArgumentException {
+        //MOCK
+        String senha = mockDatabase.get(usuario.getID());
+        //String senha = db.obterSenha(usuario.getID());
+        if (usuario.getSenha().equals(senha))
+            return true;
+        throw new IllegalArgumentException("Senha incorreta!");
     }
 
     private boolean ehUsuarioValido(Usuario usuario) throws IllegalArgumentException {
-        if (ehNomeValido(usuario.getNome()) 
-            && ehTelefoneValido(usuario.getTelefone())
-            && ehCPFValido(usuario.getCPF())
-            && ehAnoDeNascimentoValido(usuario.getAnoNascimento())
-            && ehSenhaValida(usuario.getSenha())) {
+        if (ehNomeValido(usuario.getNome()) && ehTelefoneValido(usuario.getTelefone()) && ehCPFValido(usuario.getCPF())
+                && ehAnoDeNascimentoValido(usuario.getAnoNascimento()) && ehSenhaValida(usuario.getSenha())) {
             return true;
         }
         return false;
@@ -128,7 +148,8 @@ public class HelperProntuario implements HelperDB {
         if (isDigit(telefone) && telefone.length() == MAX_CARACTER_TELEFONE) {
             return true;
         }
-        throw new IllegalArgumentException("Telefone inválido! Inclua seu DDD e número de telefone, e digite apenas números.");
+        throw new IllegalArgumentException(
+                "Telefone inválido! Inclua seu DDD e número de telefone, e digite apenas números.");
     }
 
     private boolean ehCPFValido(String CPF) throws IllegalArgumentException {
@@ -150,6 +171,7 @@ public class HelperProntuario implements HelperDB {
                 && senha.length() >= MIN_CARACTER_SENHA) {
             return true;
         }
-        throw new IllegalArgumentException("Senha inválida! Escolha uma senha com pelo menos 8 caracteres e até no máximo 30, podendo usar letras ou números.");
+        throw new IllegalArgumentException(
+                "Senha inválida! Escolha uma senha com pelo menos 8 caracteres e até no máximo 30, podendo usar letras ou números.");
     }
 }
