@@ -60,11 +60,7 @@ public class HelperProntuario implements HelperDB {
                 return true;
             }
         }
-        return false;
-        /*
-         * quando colocar detecçao de erro no GUI para telefone e cpf serem apenas
-         * numeros tirar os daqui
-         */
+        throw new IllegalArgumentException("Falha ao conectar ao Banco de Dados!");
     }
 
     public boolean adicionarMedicamento(Medicamento medicamento) {
@@ -111,39 +107,42 @@ public class HelperProntuario implements HelperDB {
     }
 
     private boolean ehUsuarioValido(Usuario usuario) throws IllegalArgumentException {
-        if (ehCPFValido(usuario.getCPF()) && ehNomeValido(usuario.getNome()) && ehTelefoneValido(usuario.getTelefone())
-                && ehAnoDeNascimentoValido(usuario.getAnoNascimento()) && ehSenhaValida(usuario.getSenha())) {
+        if (ehNomeValido(usuario.getNome()) 
+            && ehTelefoneValido(usuario.getTelefone())
+            && ehCPFValido(usuario.getCPF())
+            && ehAnoDeNascimentoValido(usuario.getAnoNascimento())
+            && ehSenhaValida(usuario.getSenha())) {
             return true;
         }
         return false;
     }
 
-    private boolean ehCPFValido(String CPF) throws IllegalArgumentException {
-        if (isDigit(CPF) && CPF.length() == MAX_CARACTER_CPF) {
-            return true;
-        }
-        throw new IllegalArgumentException("Parametros do CPF sao invalidos, por favor, digite corretamente.");
-    }
-
     private boolean ehNomeValido(String nome) throws IllegalArgumentException {
-        if (nome.matches("[a-zA-Z]+") && nome.length() > MAX_CARACTER_NOME) {
+        if (nome.matches("[a-zA-Z ]+") && nome.length() <= MAX_CARACTER_NOME) {
             return true;
         }
-        throw new IllegalArgumentException("Parametros do nome sao invalidos, por favor, digite corretamente.");
+        throw new IllegalArgumentException("Nome inválido! Use apenas letras e espaço.");
     }
 
     private boolean ehTelefoneValido(String telefone) throws IllegalArgumentException {
         if (isDigit(telefone) && telefone.length() == MAX_CARACTER_TELEFONE) {
             return true;
         }
-        throw new IllegalArgumentException("Parametros do telefone sao invalidos, por favor, digite corretamente.");
+        throw new IllegalArgumentException("Telefone inválido! Inclua seu DDD e número de telefone, e digite apenas números.");
+    }
+
+    private boolean ehCPFValido(String CPF) throws IllegalArgumentException {
+        if (isDigit(CPF) && CPF.length() == MAX_CARACTER_CPF) {
+            return true;
+        }
+        throw new IllegalArgumentException("CPF inválido! Digite apenas os 11 números do seu CPF.");
     }
 
     private boolean ehAnoDeNascimentoValido(String anoNascimento) throws IllegalArgumentException {
         if (isDigit(anoNascimento) && anoNascimento.length() == MAX_CARACTER_ANONASCIMENTO) {
             return true;
         }
-        throw new IllegalArgumentException("Ano de nascimento invalido, por favor, digite corretamente.");
+        throw new IllegalArgumentException("Ano inválido! Digite apenas seu ano de nascimento.");
     }
 
     private boolean ehSenhaValida(String senha) throws IllegalArgumentException {
@@ -151,6 +150,6 @@ public class HelperProntuario implements HelperDB {
                 && senha.length() >= MIN_CARACTER_SENHA) {
             return true;
         }
-        throw new IllegalArgumentException("Parametros da senha sao invalidos, por favor, digite corretamente.");
+        throw new IllegalArgumentException("Senha inválida! Escolha uma senha com pelo menos 8 caracteres e até no máximo 30, podendo usar letras ou números.");
     }
 }
