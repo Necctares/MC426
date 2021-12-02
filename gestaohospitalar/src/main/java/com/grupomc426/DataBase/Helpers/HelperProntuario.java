@@ -1,6 +1,7 @@
 package com.grupomc426.DataBase.Helpers;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.grupomc426.DataBase.ACAO;
@@ -68,12 +69,24 @@ public class HelperProntuario implements HelperDB {
         throw new IllegalArgumentException("Falha ao conectar ao Banco de Dados!");
     }
 
-    public boolean adicionarMedicamento(Medicamento medicamento) {
+    public boolean adicionarMedicamento(int prontuarioID, Medicamento medicamento) {
         Map<String, String> mapaMedicamento = new HashMap<String, String>();
-        mapaMedicamento.put("nome", medicamento.getNome());
-        mapaMedicamento.put("id", medicamento.getID());
-        mapaMedicamento.put("composto", medicamento.getComposto());
-        return db.adicionarMedicamento(mapaMedicamento);
+        mapaMedicamento.put("id", Integer.toString(medicamento.getID()));
+        mapaMedicamento.put("numUso", Integer.toString(medicamento.getNumUso()));
+        return db.adicionarMedicamento(prontuarioID, mapaMedicamento);
+    }
+
+    public List<Medicamento> pegarMedicamento(int prontuarioID) {
+        List<Medicamento> lista = db.pegarMedicamento(prontuarioID);
+        if (lista.size() > 0) {
+            return lista;
+        } else {
+            return null;
+        }
+    }
+
+    public boolean removerMedicamento(int objID){
+        return db.removerMedicamento(objID);
     }
 
     public boolean adicionarExame(Exame exame) {
@@ -110,20 +123,19 @@ public class HelperProntuario implements HelperDB {
             return false;
     }
 
-    private boolean usuarioExiste (Usuario usuario) throws IllegalArgumentException {
-        //MOCK
+    private boolean usuarioExiste(Usuario usuario) throws IllegalArgumentException {
+        // MOCK
         if (mockDatabase.containsKey(usuario.getID())) {
             return true;
-        }
-        else {
+        } else {
             throw new IllegalArgumentException("Usuário não cadastrado!");
         }
     }
 
-    private boolean senhaEstaCorreta (Usuario usuario) throws IllegalArgumentException {
-        //MOCK
+    private boolean senhaEstaCorreta(Usuario usuario) throws IllegalArgumentException {
+        // MOCK
         String senha = mockDatabase.get(usuario.getID());
-        //String senha = db.obterSenha(usuario.getID());
+        // String senha = db.obterSenha(usuario.getID());
         if (usuario.getSenha().equals(senha))
             return true;
         throw new IllegalArgumentException("Senha incorreta!");

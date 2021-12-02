@@ -62,11 +62,11 @@ public class DataBase {
                 + "(id INTEGER not NULL, senha VARCHAR(30) not NULL, ehFuncionario TINYINT, PRIMARY KEY(id))";
         String create_Medico = "CREATE TABLE IF NOT EXISTS MEDICO "
                 + "(crm INTEGER not NULL, cpf INTEGER not NULL, assinatura TEXT, " + " PRIMARY KEY(crm))";
-        String create_medicamentos = "CREATE TABLE IF NOT EXISTS MEDICAMENTO " + "(nome VARCHAR(40), "
-                + " id INTEGER not NULL," + " compostoAtivo VARCHAR(40), " + " PRIMARY KEY ( id ))";
+        String create_medicamentos = "CREATE TABLE IF NOT EXISTS MEDICAMENTO " + "(id INTEGER not NULL AUTO_INCREMENT, "
+                + "nome VARCHAR(40)," + " compostoAtivo VARCHAR(40), " + "PRIMARY KEY ( id ))";
         String create_medUsados = "CREATE TABLE IF NOT EXISTS MEDICAMENTOS_USADOS "
-                + "(idExame INTEGER, idMedicamento INTEGER not NULL, cpf INTEGER not NULL, "
-                + " numUso INTEGER not NULL, PRIMARY KEY (idExame, idMedicamento, cpf))";
+                + "(id_uso INTEGER not NULL AUTO_INCREMENT, idProntuario INTEGER not NULL, idMedicamento INTEGER not NULL, "
+                + " numUso INTEGER not NULL, PRIMARY KEY (id))";
         String create_exames = "CREATE TABLE IF NOT EXISTS EXAME "
                 + "(idExame INTEGER not NULL, cpf INTEGER not NULL, titulo VARCHAR(45), crm INTEGER not NULL, anotacoes TEXT, "
                 + "resultado TEXT, assinatura TEXT, data DATETIME, PRIMARY KEY (idExame))";

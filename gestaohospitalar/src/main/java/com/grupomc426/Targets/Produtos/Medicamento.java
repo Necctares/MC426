@@ -1,17 +1,21 @@
 package com.grupomc426.Targets.Produtos;
 
 public class Medicamento {
-    private String id;
+    private int id;
+    private int objId;
     private String nome;
     private String composto;
+    private int numUso;
 
-    public Medicamento(String id, String nome, String composto){
+    public Medicamento(int id, String nome, String composto, int numUso, int objId){
         this.id = id;
         this.nome = nome;
         this.composto = composto;
+        this.numUso = numUso;
+        this.objId = objId;
     }
 
-    public String getID(){
+    public int getID(){
         return id;
     }
 
@@ -21,5 +25,13 @@ public class Medicamento {
 
     public String getComposto(){
         return composto;
+    }
+
+    public int getNumUso(){
+        return numUso;
+    }
+
+    public int getObjId(){
+        return objId;
     }
 }

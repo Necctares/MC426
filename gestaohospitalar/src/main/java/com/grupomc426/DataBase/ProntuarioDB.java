@@ -1,10 +1,15 @@
 package com.grupomc426.DataBase;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+
+import com.grupomc426.Targets.Produtos.Medicamento;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ProntuarioDB extends DataBase{
+public class ProntuarioDB extends DataBase {
 
     public void adicionarPessoa(String pessoaValues) {
         makeAcess();
@@ -50,10 +55,46 @@ public class ProntuarioDB extends DataBase{
         closeAcess();
     }
 
-    public boolean adicionarMedicamento(Map<String, String> medicamento) {
+    public boolean adicionarMedicamento(int prontuarioID, Map<String, String> medicamento) {
         makeAcess();
-        String cmd = "INSERT INTO CONSULTA VALUES " + medicamento.get("nome") + medicamento.get("id")
-                + medicamento.get("composto");
+        String cmd = "INSERT INTO MEDICAMENTOS_USADOS VALUES " + Integer.toString(prontuarioID) + ", "
+                + medicamento.get("id")
+                + ", " + medicamento.get("numUso") + ";";
+        try {
+            statement.executeUpdate(cmd);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+        closeAcess();
+        return true;
+    }
+
+    public List<Medicamento> pegarMedicamento(int prontuarioID) {
+        makeAcess();
+        String cmd = "SELECT MU.id_uso, MU.numUso, ME.id, ME.nome, ME.compostoAtivo FROM MEDICAMENTOS_USADOS MU, MEDICAMENTO ME WHERE MU.idProntuario = "
+                + Integer.toString(prontuarioID)
+                + " AND MU.idMedicamento = ME.id;";
+        List<Medicamento> resultado = new ArrayList<Medicamento>();
+        try {
+            resultSet = statement.executeQuery(cmd);
+            while (resultSet.next()) {
+                Medicamento novo = new Medicamento(resultSet.getInt("id"), resultSet.getString("nome"),
+                        resultSet.getString("compostoAtivo"), resultSet.getInt("numUso"), resultSet.getInt("id_uso"));
+                resultado.add(novo);
+            }
+            resultSet.close();
+            resultSet = null;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        closeAcess();
+        return resultado;
+    }
+
+    public boolean removerMedicamento(int objID) {
+        makeAcess();
+        String cmd = "DELETE FROM MEDICAMENTOS_USADOS MU WHERE MU.id_uso = " + Integer.toString(objID) + ";";
         try {
             statement.executeUpdate(cmd);
         } catch (SQLException e) {
@@ -105,8 +146,8 @@ public class ProntuarioDB extends DataBase{
 
         try {
             ResultSet rs = statement.executeQuery(cmd);
-            
-            while(rs.next()) {
+
+            while (rs.next()) {
                 senha = rs.getString("senha");
             }
         } catch (SQLException e) {
