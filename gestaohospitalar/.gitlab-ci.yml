@@ -3,6 +3,10 @@ variables:
 
 image: maven:latest
 
+before_script:
+  - "Xvfb :99 &"
+  - "export DISPLAY=:99"
+
 stages:
     - build
     - test
