@@ -17,8 +17,8 @@ public class Consulta {
         this.prontuario = prontuario;
         this.horario = horario;
     }
-    
-    public int getID(){
+
+    public int getID() {
         return consultaID;
     }
 

@@ -9,6 +9,8 @@ import com.grupomc426.DataBase.ProntuarioDB;
 import com.grupomc426.Targets.Atendimento.Exame;
 import com.grupomc426.Targets.Atendimento.Prontuario;
 import com.grupomc426.Targets.Produtos.Medicamento;
+import com.grupomc426.Targets.Usuarios.Medico;
+import com.grupomc426.Targets.Usuarios.Pessoa;
 import com.grupomc426.Targets.Usuarios.Usuario;
 
 public class HelperProntuario implements HelperDB {
@@ -85,7 +87,7 @@ public class HelperProntuario implements HelperDB {
         }
     }
 
-    public boolean removerMedicamento(int objID){
+    public boolean removerMedicamento(int objID) {
         return db.removerMedicamento(objID);
     }
 
@@ -107,11 +109,19 @@ public class HelperProntuario implements HelperDB {
         return db.assinarExame(exameId, assinatura);
     }
 
-    public Prontuario obterProntuario(int prontuarioId) {
-        String prontuario = db.obterProntuario(prontuarioId);
+    public Prontuario obterProntuario(String cpf) {
+        String prontuario = db.obterProntuario(cpf);
         Prontuario novoProntuario = null;
         // TODO
         return novoProntuario;
+    }
+
+    public Pessoa obterPessoa(String cpf) {
+        return db.obterPessoa(cpf);
+    }
+
+    public Medico obterMedico(String crm){
+        return db.obterMedico(crm);
     }
 
     @Override

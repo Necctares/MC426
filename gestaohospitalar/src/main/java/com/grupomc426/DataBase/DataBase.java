@@ -57,7 +57,7 @@ public class DataBase {
     private void startTables() {
         makeAcess();
         String create_pessoa = "CREATE TABLE IF NOT EXISTS PESSOA " + "(nome VARCHAR(100), " + " telefone VARCHAR(11), "
-                + "cpf VARCHAR(13) not NULL, " + " age INTEGER, " + " PRIMARY KEY ( cpf ))";
+                + "cpf VARCHAR(13) not NULL, " + " year INTEGER, " + " PRIMARY KEY ( cpf ))";
         String create_usuario = "CREATE TABLE IF NOT EXISTS USUARIO "
                 + "(id INTEGER not NULL, senha VARCHAR(30) not NULL, ehFuncionario TINYINT, PRIMARY KEY(id))";
         String create_Medico = "CREATE TABLE IF NOT EXISTS MEDICO "
@@ -73,7 +73,7 @@ public class DataBase {
         String create_anotacoes = "CREATE TABLE IF NOT EXISTS ANOTACAO "
                 + "(cpf INTEGER not NULL, id INTEGER not NULL, anotacao TEXT, PRIMARY KEY(id))";
         String create_consulta = "CREATE TABLE IF NOT EXISTS CONSULTA "
-                + "(idConsulta INTEGER not NULL, crm INTEGER not NULL, cpf INTEGER not NULL, data DATETIME not NULL, PRIMARY KEY(idConsulta))";
+                + "(idConsulta INTEGER not NULL AUTO_INCREMENT, crm INTEGER not NULL, cpf VARCHAR(13) not NULL, data DATETIME not NULL, PRIMARY KEY(idConsulta))";
         String create_horario = "CREATE TABLE IF NOT EXISTS HORARIO "
                 + "(data DATETIME not NULL, crm INTEGER not NULL, cpf INTEGER not NULL" + "PRIMARY KEY(data, crm))";
         try {
@@ -123,7 +123,7 @@ public class DataBase {
     }
 
     // TODO
-    boolean checarLogin(){
+    boolean checarLogin() {
         return false;
     }
 }
