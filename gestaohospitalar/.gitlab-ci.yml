@@ -20,7 +20,7 @@ build_job:
 
   script: 
     - echo "Iniciada a compilacao..."
-    - "mvn -f gestaohospitalar/pom.xml compile"
+    - "mvn -f gestaohospitalar/pom.xml compile -Dcheckstyle.skip"
 
 
 test_job:
@@ -30,4 +30,4 @@ test_job:
 
   script: 
     - echo "Iniciado os testes..."
-    - "mvn -f gestaohospitalar test"
+    - "mvn -f gestaohospitalar test -Dcheckstyle.skip"
