@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.grupomc426.Targets.Produtos.Medicamento;
+import com.grupomc426.Targets.Usuarios.Medico;
+import com.grupomc426.Targets.Usuarios.Pessoa;
+import com.grupomc426.Targets.Usuarios.Usuario;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,6 +23,49 @@ public class ProntuarioDB extends DataBase {
             e.printStackTrace();
         }
         closeAcess();
+    }
+
+    public Pessoa obterPessoa(String cpf) {
+        makeAcess();
+        String cmd = "SELECT * FROM PESSOA P WHERE P.cpf = '" + cpf + "';";
+        Pessoa pessoa = null;
+        try {
+            resultSet = statement.executeQuery(cmd);
+            if (resultSet.next()) {
+                pessoa = new Pessoa(resultSet.getString("nome"), resultSet.getString("telefone"),
+                        resultSet.getString("cpf"), resultSet.getString("year"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        closeAcess();
+        return pessoa;
+    }
+
+    public Medico obterMedico(String crm) {
+        makeAcess();
+        String cmd = "SELECT * FROM MEDICO M WHERE M.crm = " + crm + ";";
+        Medico medico = null;
+        try {
+            resultSet = statement.executeQuery(cmd);
+            if (resultSet.next()) {
+                String assinatura = resultSet.getString("assinatura");
+                String cpf = resultSet.getString("cpf");
+
+                cmd = "SELECT * FROM PESSOA P WHERE P.cpf = '" + cpf + "';";
+                resultSet = statement.executeQuery(cmd);
+
+                if (resultSet.next()) {
+                    Pessoa pessoa = new Pessoa(resultSet.getString("nome"), resultSet.getString("telefone"),
+                            resultSet.getString("cpf"), resultSet.getString("year"));
+                    medico = new Medico(new Usuario(pessoa, null, true), crm, assinatura);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        closeAcess();
+        return medico;
     }
 
     public void adicionarUsuario(String usuarioValues) {
@@ -134,7 +180,7 @@ public class ProntuarioDB extends DataBase {
     }
 
     /* TODO */
-    public String obterProntuario(int prontuarioID) {
+    public String obterProntuario(String cpf) {
         String prontuario = null;
         return prontuario;
     }

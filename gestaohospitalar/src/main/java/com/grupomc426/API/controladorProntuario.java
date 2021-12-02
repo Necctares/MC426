@@ -45,8 +45,8 @@ public class controladorProntuario {
         return db.assinarExame(exameID, medico.getCrm());
     }
 
-    public Prontuario obterProntuario(int prontuarioID) {
-        return db.obterProntuario(prontuarioID);
+    public Prontuario obterProntuario(String cpf) {
+        return db.obterProntuario(cpf);
     }
     
     public boolean operacaoCadastro(ACAO operacao, Usuario usuario) throws IllegalArgumentException {
