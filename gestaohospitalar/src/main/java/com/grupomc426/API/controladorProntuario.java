@@ -17,11 +17,19 @@ public class controladorProntuario {
 
     public boolean adicionarMedicamentos(int prontuarioID, List<Medicamento> medicamentos) {
         for(Medicamento medicamento : medicamentos){
-            if(!db.adicionarMedicamento(medicamento)){
+            if(!db.adicionarMedicamento(prontuarioID, medicamento)){
                 return false;
             }
         }
         return true;
+    }
+
+    public List<Medicamento> pegarMedicamento(int prontuarioID){
+        return db.pegarMedicamento(prontuarioID);
+    }
+
+    public boolean removerMedicamento(int objID){
+        return db.removerMedicamento(objID);
     }
 
     public boolean adicionarExames(int prontuarioID, List<Exame> exames) {
