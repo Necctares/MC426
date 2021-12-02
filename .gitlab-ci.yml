@@ -11,7 +11,7 @@ stages:
 cache:
   paths:
     - .m2/repository
-    - gestaohospitalar/target
+    - target
 
 build_job:
   stage: build
