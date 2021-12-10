@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.grupomc426.Targets.Atendimento.Exame;
 import com.grupomc426.Targets.Produtos.Medicamento;
 import com.grupomc426.Targets.Usuarios.Medico;
 import com.grupomc426.Targets.Usuarios.Pessoa;
@@ -11,6 +12,7 @@ import com.grupomc426.Targets.Usuarios.Usuario;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 
 public class ProntuarioDB extends DataBase {
 
@@ -151,11 +153,54 @@ public class ProntuarioDB extends DataBase {
         return true;
     }
 
+    public List<Exame> pegarExames(String cpf) {
+        makeAcess();
+        String cmd = "SELECT * FROM EXAME E WHERE E.cpf = " + cpf + ";";
+        List<Exame> exames = new ArrayList<Exame>();
+        try {
+            resultSet = statement.executeQuery(cmd);
+            while (resultSet.next()) {
+                Exame novo = new Exame(resultSet.getString("titulo"), resultSet.getString("idExame"),
+                        obterMedico(resultSet.getString("crm")),
+                        new Usuario(obterPessoa(resultSet.getString("cpf")), null, false),
+                        resultSet.getString("anotacoes"), resultSet.getString("resultado"), true,
+                        resultSet.getString("assinatura"), LocalDateTime.parse(resultSet.getString("data")));
+                exames.add(novo);
+            }
+            resultSet.close();
+            resultSet = null;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return exames;
+        }
+        closeAcess();
+        return exames;
+    }
+
+    public List<String> pegarAnotacoes(String cpf) {
+        makeAcess();
+        String cmd = "SELECT * FROM ANOTACAO A WHERE A.cpf = " + cpf + ";";
+        List<String> anotacoes = new ArrayList<String>();
+        try {
+            resultSet = statement.executeQuery(cmd);
+            while (resultSet.next()) {
+                anotacoes.add(resultSet.getString("anotacao"));
+            }
+            resultSet.close();
+            resultSet = null;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        closeAcess();
+        return anotacoes;
+    }
+
     public boolean adicionarExame(Map<String, String> exame) {
         makeAcess();
-        String cmd = "INSERT INTO EXAME VALUES " + exame.get("titulo") + exame.get("id") + exame.get("medico")
-                + exame.get("paciente") + exame.get("anotacoes") + exame.get("resultado") + exame.get("foiAssinado")
-                + exame.get("assinatura") + exame.get("data");
+        String cmd = "INSERT INTO EXAME VALUES " + exame.get("id") + ", " + exame.get("paciente") + ", "
+                + exame.get("titulo") + ", " +
+                exame.get("medico") + ", " + exame.get("anotacoes") + ", " + exame.get("resultado") + ", "
+                + exame.get("assinatura") + ", " + exame.get("horario") + ";";
         try {
             statement.executeUpdate(cmd);
         } catch (SQLException e) {
@@ -168,7 +213,7 @@ public class ProntuarioDB extends DataBase {
 
     public boolean assinarExame(String exameID, String assinatura) {
         makeAcess();
-        String cmd = "UPDATE EXAME SET assinatura=" + assinatura + "WHERE idExame=" + exameID;
+        String cmd = "UPDATE EXAME SET assinatura = " + assinatura + " WHERE idExame = " + exameID + ";";
         try {
             statement.executeUpdate(cmd);
         } catch (SQLException e) {
@@ -179,10 +224,32 @@ public class ProntuarioDB extends DataBase {
         return true;
     }
 
-    /* TODO */
-    public String obterProntuario(String cpf) {
-        String prontuario = null;
-        return prontuario;
+    public List<String> pegarPacientes(String crm) {
+        makeAcess();
+        List<String> pacientes = new ArrayList<String>();
+        String cmd = "SELECT cpf FROM CONSULTA WHERE crm = " + crm + ";";
+        try {
+            resultSet = statement.executeQuery(cmd);
+            while (resultSet.next()) {
+                String cpf_rs = resultSet.getString("cpf");
+                boolean temCpf = false;
+                for (String cpfs : pacientes) {
+                    if (cpfs.equals(cpf_rs)) {
+                        temCpf = true;
+                        break;
+                    }
+                }
+                if (!temCpf) {
+                    pacientes.add(cpf_rs);
+                }
+            }
+            resultSet.close();
+            resultSet = null;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        closeAcess();
+        return pacientes;
     }
 
     public String obterSenha(String id) {

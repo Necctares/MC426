@@ -105,22 +105,41 @@ public class HelperProntuario implements HelperDB {
         return db.adicionarExame(mapaExame);
     }
 
+    public List<Exame> pegarExames(String cpf) {
+        List<Exame> lista = db.pegarExames(cpf);
+        if (lista.size() > 0) {
+            return lista;
+        } else {
+            return null;
+        }
+    }
+
     public boolean assinarExame(String exameId, String assinatura) {
         return db.assinarExame(exameId, assinatura);
     }
 
     public Prontuario obterProntuario(String cpf) {
-        String prontuario = db.obterProntuario(cpf);
-        Prontuario novoProntuario = null;
-        // TODO
+        Usuario paciente = new Usuario(obterPessoa(cpf), null, false);
+        List<Exame> exames = db.pegarExames(cpf);
+        List<String> anotacoes = db.pegarAnotacoes(cpf);
+        Prontuario novoProntuario = new Prontuario(Integer.parseInt(cpf, 10), paciente, exames, anotacoes);
         return novoProntuario;
+    }
+
+    public List<String> pegarPacientes(String crm) {
+        List<String> pacientes = db.pegarPacientes(crm);
+        if (pacientes.size() > 0) {
+            return pacientes;
+        } else {
+            return null;
+        }
     }
 
     public Pessoa obterPessoa(String cpf) {
         return db.obterPessoa(cpf);
     }
 
-    public Medico obterMedico(String crm){
+    public Medico obterMedico(String crm) {
         return db.obterMedico(crm);
     }
 

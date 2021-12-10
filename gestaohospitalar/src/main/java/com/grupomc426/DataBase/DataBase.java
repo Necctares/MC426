@@ -71,7 +71,7 @@ public class DataBase {
                 + "(idExame INTEGER not NULL, cpf INTEGER not NULL, titulo VARCHAR(45), crm INTEGER not NULL, anotacoes TEXT, "
                 + "resultado TEXT, assinatura TEXT, data DATETIME, PRIMARY KEY (idExame))";
         String create_anotacoes = "CREATE TABLE IF NOT EXISTS ANOTACAO "
-                + "(cpf INTEGER not NULL, id INTEGER not NULL, anotacao TEXT, PRIMARY KEY(id))";
+                + "(cpf INTEGER not NULL, id INTEGER not NULL AUTO_INCREMENT, anotacao TEXT, PRIMARY KEY(id))";
         String create_consulta = "CREATE TABLE IF NOT EXISTS CONSULTA "
                 + "(idConsulta INTEGER not NULL AUTO_INCREMENT, crm INTEGER not NULL, cpf VARCHAR(13) not NULL, data DATETIME not NULL, PRIMARY KEY(idConsulta))";
         String create_horario = "CREATE TABLE IF NOT EXISTS HORARIO "
