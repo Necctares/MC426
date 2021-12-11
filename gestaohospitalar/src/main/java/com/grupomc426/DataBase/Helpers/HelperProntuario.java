@@ -16,9 +16,6 @@ import com.grupomc426.Targets.Usuarios.Usuario;
 public class HelperProntuario implements HelperDB {
     private ProntuarioDB db;
     private static HelperProntuario instance = null;
-    // TODO
-    // Mock para substituir temporariamente o DB
-    private Map<String, String> mockDatabase = new HashMap<String, String>();
 
     // Constantes
     private final int MAX_CARACTER_CPF = 11;
@@ -30,8 +27,6 @@ public class HelperProntuario implements HelperDB {
 
     private HelperProntuario() {
         db = new ProntuarioDB();
-        mockDatabase.put("11111111111", "12345678");
-        mockDatabase.put("01234567890", "87654321");
     }
 
     public static HelperProntuario getDB() {
@@ -53,10 +48,16 @@ public class HelperProntuario implements HelperDB {
     public boolean operacaoCadastro(ACAO operacao, Usuario usuario) throws IllegalArgumentException {
         if (operacao == ACAO.ADICIONAR) {
             if (ehUsuarioValido(usuario)) {
+                int funcionario;
+                if(usuario.getEhFuncionario()){
+                    funcionario = 1;
+                }else{
+                    funcionario = 0;
+                }
                 String cadastro = "('" + usuario.getNome() + "', '" + usuario.getTelefone() + "', '" + usuario.getCPF()
                         + "', " + usuario.getAnoNascimento() + ")";
                 db.adicionarPessoa(cadastro);
-                cadastro = "('" + usuario.getID() + "', '" + usuario.getSenha() + "', '" + usuario.getEhFuncionario()
+                cadastro = "('" + usuario.getID() + "', '" + usuario.getSenha() + "', " + Integer.toString(funcionario)
                         + ")";
                 db.adicionarUsuario(cadastro);
                 return true;
@@ -145,29 +146,7 @@ public class HelperProntuario implements HelperDB {
 
     @Override
     public boolean tentarLogin(Usuario usuario) throws IllegalArgumentException {
-        // TODO Implementar Parte do DB
-        if (usuarioExiste(usuario) && senhaEstaCorreta(usuario))
-            return true;
-        else
-            return false;
-    }
-
-    private boolean usuarioExiste(Usuario usuario) throws IllegalArgumentException {
-        // MOCK
-        if (mockDatabase.containsKey(usuario.getID())) {
-            return true;
-        } else {
-            throw new IllegalArgumentException("Usuário não cadastrado!");
-        }
-    }
-
-    private boolean senhaEstaCorreta(Usuario usuario) throws IllegalArgumentException {
-        // MOCK
-        String senha = mockDatabase.get(usuario.getID());
-        // String senha = db.obterSenha(usuario.getID());
-        if (usuario.getSenha().equals(senha))
-            return true;
-        throw new IllegalArgumentException("Senha incorreta!");
+        return db.tentarLogin(usuario);
     }
 
     private boolean ehUsuarioValido(Usuario usuario) throws IllegalArgumentException {

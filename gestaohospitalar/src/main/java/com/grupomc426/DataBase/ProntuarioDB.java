@@ -10,15 +10,18 @@ import com.grupomc426.Targets.Usuarios.Medico;
 import com.grupomc426.Targets.Usuarios.Pessoa;
 import com.grupomc426.Targets.Usuarios.Usuario;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 
 public class ProntuarioDB extends DataBase {
 
+    public ProntuarioDB(){
+        startDB();
+    }
+
     public void adicionarPessoa(String pessoaValues) {
         makeAcess();
-        String cmd = "INSERT INTO PESSOA VALUES " + pessoaValues;
+        String cmd = "INSERT INTO PESSOA VALUES " + pessoaValues + ";";
         try {
             statement.executeUpdate(cmd);
         } catch (SQLException e) {
@@ -72,7 +75,7 @@ public class ProntuarioDB extends DataBase {
 
     public void adicionarUsuario(String usuarioValues) {
         makeAcess();
-        String cmd = "INSERT INTO USUARIO VALUES " + usuarioValues;
+        String cmd = "INSERT INTO USUARIO VALUES " + usuarioValues + ";";
         try {
             statement.executeUpdate(cmd);
         } catch (SQLException e) {
@@ -252,22 +255,28 @@ public class ProntuarioDB extends DataBase {
         return pacientes;
     }
 
-    public String obterSenha(String id) {
-        String senha = null;
+    public boolean tentarLogin(Usuario user) {
         makeAcess();
-        String cmd = "SELECT senha FROM USUARIO WHERE id = " + id;
-
+        String senha = null;
+        String cmd = "SELECT senha FROM USUARIO WHERE id = " + user.getID() + ";";
+        boolean achouUsuario = false;
         try {
-            ResultSet rs = statement.executeQuery(cmd);
-
-            while (rs.next()) {
-                senha = rs.getString("senha");
+            resultSet = statement.executeQuery(cmd);
+            if (resultSet.next()) {
+                achouUsuario = true;
+                senha = resultSet.getString("senha");
             }
+            resultSet.close();
+            resultSet = null;
         } catch (SQLException e) {
             e.printStackTrace();
-            return null;
+            return false;
         }
         closeAcess();
-        return senha;
+        if (achouUsuario && user.getSenha().equals(senha)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

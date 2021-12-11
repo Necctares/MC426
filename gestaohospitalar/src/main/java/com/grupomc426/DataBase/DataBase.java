@@ -57,25 +57,25 @@ public class DataBase {
     private void startTables() {
         makeAcess();
         String create_pessoa = "CREATE TABLE IF NOT EXISTS PESSOA " + "(nome VARCHAR(100), " + " telefone VARCHAR(11), "
-                + "cpf VARCHAR(13) not NULL, " + " year INTEGER, " + " PRIMARY KEY ( cpf ))";
+                + "cpf VARCHAR(13) not NULL, " + " year INTEGER, " + " PRIMARY KEY ( cpf ));";
         String create_usuario = "CREATE TABLE IF NOT EXISTS USUARIO "
-                + "(id INTEGER not NULL, senha VARCHAR(30) not NULL, ehFuncionario TINYINT, PRIMARY KEY(id))";
+                + "(id VARCHAR(13) not NULL PRIMARY KEY, senha VARCHAR(30) not NULL, ehFuncionario TINYINT);";
         String create_Medico = "CREATE TABLE IF NOT EXISTS MEDICO "
-                + "(crm INTEGER not NULL, cpf INTEGER not NULL, assinatura TEXT, " + " PRIMARY KEY(crm))";
+                + "(crm INTEGER not NULL, cpf INTEGER not NULL, assinatura TEXT, " + " PRIMARY KEY(crm));";
         String create_medicamentos = "CREATE TABLE IF NOT EXISTS MEDICAMENTO " + "(id INTEGER not NULL AUTO_INCREMENT, "
-                + "nome VARCHAR(40)," + " compostoAtivo VARCHAR(40), " + "PRIMARY KEY ( id ))";
+                + "nome VARCHAR(40)," + " compostoAtivo VARCHAR(40), " + "PRIMARY KEY ( id ));";
         String create_medUsados = "CREATE TABLE IF NOT EXISTS MEDICAMENTOS_USADOS "
                 + "(id_uso INTEGER not NULL AUTO_INCREMENT, idProntuario INTEGER not NULL, idMedicamento INTEGER not NULL, "
-                + " numUso INTEGER not NULL, PRIMARY KEY (id))";
+                + " numUso INTEGER not NULL, PRIMARY KEY (id_uso));";
         String create_exames = "CREATE TABLE IF NOT EXISTS EXAME "
                 + "(idExame INTEGER not NULL, cpf INTEGER not NULL, titulo VARCHAR(45), crm INTEGER not NULL, anotacoes TEXT, "
-                + "resultado TEXT, assinatura TEXT, data DATETIME, PRIMARY KEY (idExame))";
+                + "resultado TEXT, assinatura TEXT, data DATETIME, PRIMARY KEY (idExame));";
         String create_anotacoes = "CREATE TABLE IF NOT EXISTS ANOTACAO "
-                + "(cpf INTEGER not NULL, id INTEGER not NULL AUTO_INCREMENT, anotacao TEXT, PRIMARY KEY(id))";
+                + "(cpf INTEGER not NULL, id INTEGER not NULL AUTO_INCREMENT, anotacao TEXT, PRIMARY KEY(id));";
         String create_consulta = "CREATE TABLE IF NOT EXISTS CONSULTA "
-                + "(idConsulta INTEGER not NULL AUTO_INCREMENT, crm INTEGER not NULL, cpf VARCHAR(13) not NULL, data DATETIME not NULL, PRIMARY KEY(idConsulta))";
+                + "(idConsulta INTEGER not NULL AUTO_INCREMENT, crm INTEGER not NULL, cpf VARCHAR(13) not NULL, data DATETIME not NULL, PRIMARY KEY(idConsulta));";
         String create_horario = "CREATE TABLE IF NOT EXISTS HORARIO "
-                + "(data DATETIME not NULL, crm INTEGER not NULL, cpf INTEGER not NULL" + "PRIMARY KEY(data, crm))";
+                + "(data DATETIME not NULL, crm INTEGER not NULL, cpf INTEGER not NULL, " + "PRIMARY KEY(data, crm));";
         try {
             statement.executeUpdate(create_pessoa);
             statement.executeUpdate(create_usuario);
