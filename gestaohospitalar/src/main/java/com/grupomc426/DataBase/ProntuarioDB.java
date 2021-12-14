@@ -74,6 +74,32 @@ public class ProntuarioDB extends DataBase {
         return medico;
     }
 
+    public Medico obterMedicoCRM(String crm) {
+        makeAcess();
+        String cmd = "SELECT * FROM MEDICO M WHERE M.crm = " + crm + ";";
+        Medico medico = null;
+        try {
+            resultSet = statement.executeQuery(cmd);
+            if (resultSet.next()) {
+                String assinatura = resultSet.getString("assinatura");
+                String cpf = resultSet.getString("cpf");
+
+                cmd = "SELECT * FROM PESSOA P WHERE P.cpf = '" + cpf + "';";
+                resultSet = statement.executeQuery(cmd);
+
+                if (resultSet.next()) {
+                    Pessoa pessoa = new Pessoa(resultSet.getString("nome"), resultSet.getString("telefone"),
+                            resultSet.getString("cpf"), resultSet.getString("year"));
+                    medico = new Medico(new Usuario(pessoa, null, true), crm, assinatura);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        closeAcess();
+        return medico;
+    }
+
     public void adicionarUsuario(String usuarioValues) {
         makeAcess();
         String cmd = "INSERT INTO USUARIO VALUES " + usuarioValues + ";";
@@ -165,7 +191,7 @@ public class ProntuarioDB extends DataBase {
             ResultSet resultSet = statement.executeQuery(cmd);
             while (resultSet.next()) {
                 Exame novo = new Exame(resultSet.getString("titulo"), resultSet.getString("idExame"),
-                        obterMedico(resultSet.getString("crm")),
+                        obterMedicoCRM(resultSet.getString("crm")),
                         new Usuario(obterPessoa(resultSet.getString("cpf")), null, false),
                         resultSet.getString("anotacoes"), resultSet.getString("resultado"), true,
                         resultSet.getString("assinatura"), LocalDateTime.parse(resultSet.getString("data")));

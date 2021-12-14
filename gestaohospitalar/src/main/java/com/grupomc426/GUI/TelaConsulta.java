@@ -174,7 +174,7 @@ public class TelaConsulta extends javax.swing.JFrame {
 
     private void jToggleButton8ActionPerformed(java.awt.event.ActionEvent evt) {                                               
         // TODO add your handling code here:
-        TelaExame exame = new TelaExame();
+        TelaExame exame = new TelaExame(null);
         exame.setVisible(true);
     }                                              
 
