@@ -5,6 +5,9 @@
  */
 package com.grupomc426.GUI;
 
+import com.grupomc426.Targets.Usuarios.Pessoa;
+import com.grupomc426.Targets.Usuarios.Usuario;
+
 /**
  *
  * @author Melanie
@@ -14,8 +17,8 @@ public class TelaHistorico extends javax.swing.JFrame {
     /**
      * Creates new form TelaHistorico
      */
-    public TelaHistorico() {
-        initComponents();
+    public TelaHistorico(Usuario user) {
+        initComponents(user);
     }
 
     /**
@@ -25,7 +28,7 @@ public class TelaHistorico extends javax.swing.JFrame {
      */
  
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
-    private void initComponents() {
+    private void initComponents(Usuario user) {
 
         jLabel9 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -46,7 +49,7 @@ public class TelaHistorico extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Nome");
+        jLabel1.setText(user.getNome());
 
         jToggleButton1.setText("Voltar");
         jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -137,6 +140,7 @@ public class TelaHistorico extends javax.swing.JFrame {
                 "Anotacoes"
             }
         ));
+        
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -208,6 +212,7 @@ public class TelaHistorico extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
+        Usuario user = new Usuario(new Pessoa("Darlan Pereira Matos", "70912345678", "01234567890", "1990"), "mock123", false);
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -229,7 +234,7 @@ public class TelaHistorico extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaHistorico().setVisible(true);
+                new TelaHistorico(user).setVisible(true);
             }
         });
     }

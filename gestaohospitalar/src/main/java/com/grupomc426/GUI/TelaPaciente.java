@@ -5,6 +5,9 @@
  */
 package com.grupomc426.GUI;
 
+import com.grupomc426.Targets.Usuarios.Pessoa;
+import com.grupomc426.Targets.Usuarios.Usuario;
+
 /**
  *
  * @author Melanie
@@ -14,8 +17,8 @@ public class TelaPaciente extends javax.swing.JFrame {
     /**
      * Creates new form TelaPaciente
      */
-    public TelaPaciente() {
-        initComponents();
+    public TelaPaciente(Usuario user) {
+        initComponents(user);
     }
 
     /**
@@ -25,7 +28,7 @@ public class TelaPaciente extends javax.swing.JFrame {
      */
     
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents(Usuario user) {
 
         jLabel1 = new javax.swing.JLabel();
         jToggleButton1 = new javax.swing.JToggleButton();
@@ -36,7 +39,7 @@ public class TelaPaciente extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Nome");
+        jLabel1.setText(user.getNome());
 
         jToggleButton1.setText("Minhas Consultas");
         jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -62,7 +65,7 @@ public class TelaPaciente extends javax.swing.JFrame {
         jToggleButton4.setText("Historico");
         jToggleButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton4ActionPerformed(evt);
+                jToggleButton4ActionPerformed(evt, user);
             }
         });
 
@@ -134,9 +137,9 @@ public class TelaPaciente extends javax.swing.JFrame {
         marcarConsulta.setVisible(true);
     }//GEN-LAST:event_jToggleButton3ActionPerformed
 
-    private void jToggleButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton4ActionPerformed
+    private void jToggleButton4ActionPerformed(java.awt.event.ActionEvent evt, Usuario user) {//GEN-FIRST:event_jToggleButton4ActionPerformed
         // TODO add your handling code here:
-        TelaHistorico historico = new TelaHistorico();
+        TelaHistorico historico = new TelaHistorico(user);
         historico.setVisible(true);
     }//GEN-LAST:event_jToggleButton4ActionPerformed
 
@@ -154,6 +157,7 @@ public class TelaPaciente extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
+        Usuario user = new Usuario(new Pessoa("Darlan Pereira Matos", "70912345678", "01234567890", "1990"), "mock123", false);
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -175,7 +179,7 @@ public class TelaPaciente extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaPaciente().setVisible(true);
+                new TelaPaciente(user).setVisible(true);
             }
         });
     }

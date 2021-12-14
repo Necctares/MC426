@@ -140,8 +140,8 @@ public class HelperProntuario implements HelperDB {
         return db.obterPessoa(cpf);
     }
 
-    public Medico obterMedico(String crm) {
-        return db.obterMedico(crm);
+    public Medico obterMedico(String cpf) {
+        return db.obterMedico(cpf);
     }
 
     @Override

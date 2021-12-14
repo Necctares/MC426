@@ -47,20 +47,22 @@ public class ProntuarioDB extends DataBase {
         return pessoa;
     }
 
-    public Medico obterMedico(String crm) {
+    public Medico obterMedico(String cpf) {
         makeAcess();
-        String cmd = "SELECT * FROM MEDICO M WHERE M.crm = " + crm + ";";
+        String cmd = "SELECT * FROM MEDICO M WHERE M.cpf = " + cpf + ";";
         Medico medico = null;
         try {
             resultSet = statement.executeQuery(cmd);
             if (resultSet.next()) {
                 String assinatura = resultSet.getString("assinatura");
-                String cpf = resultSet.getString("cpf");
+                String crm = resultSet.getString("crm");
+                System.out.println("TESTE X: " + crm);
 
                 cmd = "SELECT * FROM PESSOA P WHERE P.cpf = '" + cpf + "';";
                 resultSet = statement.executeQuery(cmd);
 
                 if (resultSet.next()) {
+                    System.out.println("Ookie Dookie: " + crm + " " + cpf);
                     Pessoa pessoa = new Pessoa(resultSet.getString("nome"), resultSet.getString("telefone"),
                             resultSet.getString("cpf"), resultSet.getString("year"));
                     medico = new Medico(new Usuario(pessoa, null, true), crm, assinatura);
