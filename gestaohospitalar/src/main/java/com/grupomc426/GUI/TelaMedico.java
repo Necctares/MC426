@@ -57,7 +57,7 @@ public class TelaMedico extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText(medico.getNome());
+        jLabel1.setText("Medico: " + medico.getNome());
 
         jToggleButton1.setText("Minhas Consultas");
         jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -78,7 +78,8 @@ public class TelaMedico extends javax.swing.JFrame {
         List<String> pacientesDoMedico = controlador.pegarPacientes(medico.getCrm());
         String [] listaPacientes = null;
         if(pacientesDoMedico != null){
-           listaPacientes = (String []) pacientesDoMedico.toArray();
+           listaPacientes = pacientesDoMedico.toArray(new String[pacientesDoMedico.size()]);
+           paciente = listaPacientes[0];
         }else{
             listaPacientes = new String [] {"Não possui pacientes"};
         }
@@ -103,7 +104,7 @@ public class TelaMedico extends javax.swing.JFrame {
         jToggleButton4.setText("Selecionar");
         jToggleButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton4ActionPerformed(evt, null);
+                jToggleButton4ActionPerformed(evt, db.obterPessoa(paciente));
             }
         });
 
@@ -172,13 +173,16 @@ public class TelaMedico extends javax.swing.JFrame {
         proximaConsultas.setVisible(true);
     }                                              
 
-    private void jToggleButton4ActionPerformed(java.awt.event.ActionEvent evt, Usuario user) {                                               
+    private void jToggleButton4ActionPerformed(java.awt.event.ActionEvent evt, Pessoa user) {                                               
         // TODO add your handling code here:
 
-        if(!paciente.isEmpty()){
-            TelaHistorico historico = new TelaHistorico(user);
+        if(user != null){
+            TelaHistorico historico = new TelaHistorico(new Usuario(user, null, false));
             historico.setVisible(true);   
-        }     
+        }else{
+            TelaErroGenerica erro = new TelaErroGenerica("Erro, nao tem paciente");
+            erro.setVisible(true);
+        }
     }                                              
 
     private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                               

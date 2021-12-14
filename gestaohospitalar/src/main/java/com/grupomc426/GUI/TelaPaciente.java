@@ -39,7 +39,7 @@ public class TelaPaciente extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText(user.getNome());
+        jLabel1.setText("Paciente: " + user.getNome());
 
         jToggleButton1.setText("Minhas Consultas");
         jToggleButton1.addActionListener(new java.awt.event.ActionListener() {

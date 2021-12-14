@@ -56,13 +56,11 @@ public class ProntuarioDB extends DataBase {
             if (resultSet.next()) {
                 String assinatura = resultSet.getString("assinatura");
                 String crm = resultSet.getString("crm");
-                System.out.println("TESTE X: " + crm);
 
                 cmd = "SELECT * FROM PESSOA P WHERE P.cpf = '" + cpf + "';";
                 resultSet = statement.executeQuery(cmd);
 
                 if (resultSet.next()) {
-                    System.out.println("Ookie Dookie: " + crm + " " + cpf);
                     Pessoa pessoa = new Pessoa(resultSet.getString("nome"), resultSet.getString("telefone"),
                             resultSet.getString("cpf"), resultSet.getString("year"));
                     medico = new Medico(new Usuario(pessoa, null, true), crm, assinatura);
