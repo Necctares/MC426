@@ -136,10 +136,14 @@ public class MenuLogin extends javax.swing.JFrame {
         String cpf = usuarioLogin.getText();
         String senha = senhaLogin.getText();
 
-        Pessoa pessoa = new Pessoa(null, null, cpf, null);
-        Usuario usuario = new Usuario(pessoa, senha, false);
-
         controladorProntuario prontuario = new controladorProntuario();
+
+        Pessoa pessoa = prontuario.obterPessoa(cpf);
+        Usuario usuario = null;
+        if (pessoa != null) {
+            usuario = new Usuario(pessoa, senha, false);
+        }
+
         boolean logou = false;
         try {
             logou = prontuario.tentarLogin(usuario);

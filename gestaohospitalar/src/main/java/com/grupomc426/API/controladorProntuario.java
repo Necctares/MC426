@@ -72,14 +72,22 @@ public class controladorProntuario {
     }
 
     public boolean tentarLogin(Usuario usuario) {
-        return db.tentarLogin(usuario);
+        if (usuario != null) {
+            return db.tentarLogin(usuario);
+        } else {
+            return false;
+        }
     }
 
-    public List<String> pegarPacientes(String crm){
+    public List<String> pegarPacientes(String crm) {
         return db.pegarPacientes(crm);
     }
 
-    public Medico obterMedico(String cpf){
+    public Medico obterMedico(String cpf) {
         return db.obterMedico(cpf);
+    }
+
+    public Pessoa obterPessoa(String cpf) {
+        return db.obterPessoa(cpf);
     }
 }

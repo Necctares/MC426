@@ -74,7 +74,7 @@ public class ProntuarioDB extends DataBase {
         return medico;
     }
 
-    public Medico obterMedicoCRM(String crm) {
+    private Medico obterMedicoCRM(String crm) {
         makeAcess();
         String cmd = "SELECT * FROM MEDICO M WHERE M.crm = " + crm + ";";
         Medico medico = null;
