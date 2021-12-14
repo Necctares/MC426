@@ -25,8 +25,8 @@ public class controladorProntuario {
         return true;
     }
 
-    public List<Medicamento> pegarMedicamento(int prontuarioID) {
-        return db.pegarMedicamento(prontuarioID);
+    public List<Medicamento> pegarMedicamento(String cpf) {
+        return db.pegarMedicamento(cpf);
     }
 
     public boolean removerMedicamento(int objID) {

@@ -10,6 +10,7 @@ import com.grupomc426.Targets.Usuarios.Medico;
 import com.grupomc426.Targets.Usuarios.Pessoa;
 import com.grupomc426.Targets.Usuarios.Usuario;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 
@@ -121,10 +122,10 @@ public class ProntuarioDB extends DataBase {
         return true;
     }
 
-    public List<Medicamento> pegarMedicamento(int prontuarioID) {
+    public List<Medicamento> pegarMedicamento(String cpf) {
         makeAcess();
-        String cmd = "SELECT MU.id_uso, MU.numUso, ME.id, ME.nome, ME.compostoAtivo FROM MEDICAMENTOS_USADOS MU, MEDICAMENTO ME WHERE MU.idProntuario = "
-                + Integer.toString(prontuarioID)
+        String cmd = "SELECT MU.id_uso, MU.numUso, ME.id, ME.nome, ME.compostoAtivo FROM MEDICAMENTOS_USADOS MU, MEDICAMENTO ME WHERE MU.cpf = "
+                + cpf
                 + " AND MU.idMedicamento = ME.id;";
         List<Medicamento> resultado = new ArrayList<Medicamento>();
         try {
@@ -161,7 +162,7 @@ public class ProntuarioDB extends DataBase {
         String cmd = "SELECT * FROM EXAME E WHERE E.cpf = " + cpf + ";";
         List<Exame> exames = new ArrayList<Exame>();
         try {
-            resultSet = statement.executeQuery(cmd);
+            ResultSet resultSet = statement.executeQuery(cmd);
             while (resultSet.next()) {
                 Exame novo = new Exame(resultSet.getString("titulo"), resultSet.getString("idExame"),
                         obterMedico(resultSet.getString("crm")),

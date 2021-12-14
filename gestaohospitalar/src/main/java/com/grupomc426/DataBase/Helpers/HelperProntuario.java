@@ -79,8 +79,8 @@ public class HelperProntuario implements HelperDB {
         return db.adicionarMedicamento(prontuarioID, mapaMedicamento);
     }
 
-    public List<Medicamento> pegarMedicamento(int prontuarioID) {
-        List<Medicamento> lista = db.pegarMedicamento(prontuarioID);
+    public List<Medicamento> pegarMedicamento(String cpf) {
+        List<Medicamento> lista = db.pegarMedicamento(cpf);
         if (lista.size() > 0) {
             return lista;
         } else {
@@ -120,10 +120,14 @@ public class HelperProntuario implements HelperDB {
     }
 
     public Prontuario obterProntuario(String cpf) {
-        Usuario paciente = new Usuario(obterPessoa(cpf), null, false);
+        Pessoa pessoa = obterPessoa(cpf);
+        if(pessoa == null){
+            return null;
+        }
+        Usuario paciente = new Usuario(pessoa, null, false);
         List<Exame> exames = db.pegarExames(cpf);
         List<String> anotacoes = db.pegarAnotacoes(cpf);
-        Prontuario novoProntuario = new Prontuario(Integer.parseInt(cpf, 10), paciente, exames, anotacoes);
+        Prontuario novoProntuario = new Prontuario(cpf, paciente, exames, anotacoes);
         return novoProntuario;
     }
 

@@ -5,20 +5,20 @@ import java.util.List;
 import com.grupomc426.Targets.Usuarios.Usuario;
 
 public class Prontuario {
-    private int prontuarioID;
+    private String cpf;
     private Usuario paciente;
     private List<Exame> exames;
     private List<String> anotacoes;
 
-    public Prontuario(int prontuarioID, Usuario paciente, List<Exame> exames, List<String> anotacoes) {
-        this.prontuarioID = prontuarioID;
+    public Prontuario(String cpf, Usuario paciente, List<Exame> exames, List<String> anotacoes) {
+        this.cpf = cpf;
         this.paciente = paciente;
         this.exames = exames;
         this.anotacoes = anotacoes;
     }
 
-    public int getProntuarioID() {
-        return prontuarioID;
+    public String getCpfID() {
+        return cpf;
     }
 
     public Usuario getPaciente() {

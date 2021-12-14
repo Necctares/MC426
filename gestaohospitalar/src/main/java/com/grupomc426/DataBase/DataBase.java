@@ -65,10 +65,10 @@ public class DataBase {
         String create_medicamentos = "CREATE TABLE IF NOT EXISTS MEDICAMENTO " + "(id INTEGER not NULL AUTO_INCREMENT, "
                 + "nome VARCHAR(40)," + " compostoAtivo VARCHAR(40), " + "PRIMARY KEY ( id ));";
         String create_medUsados = "CREATE TABLE IF NOT EXISTS MEDICAMENTOS_USADOS "
-                + "(id_uso INTEGER not NULL AUTO_INCREMENT, idProntuario INTEGER not NULL, idMedicamento INTEGER not NULL, "
+                + "(id_uso INTEGER not NULL AUTO_INCREMENT, cpf VARCHAR(13) not NULL, idMedicamento INTEGER not NULL, "
                 + " numUso INTEGER not NULL, PRIMARY KEY (id_uso));";
         String create_exames = "CREATE TABLE IF NOT EXISTS EXAME "
-                + "(idExame INTEGER not NULL, cpf VARCHAR(13) not NULL, titulo VARCHAR(45), crm VARCHAR(7) not NULL, anotacoes TEXT, "
+                + "(idExame INTEGER not NULL AUTO_INCREMENT, cpf VARCHAR(13) not NULL, titulo VARCHAR(45), crm VARCHAR(7) not NULL, anotacoes TEXT, "
                 + "resultado TEXT, assinatura TEXT, data TEXT, PRIMARY KEY (idExame));";
         String create_anotacoes = "CREATE TABLE IF NOT EXISTS ANOTACAO "
                 + "(cpf VARCHAR(13) not NULL, id INTEGER not NULL AUTO_INCREMENT, anotacao TEXT, PRIMARY KEY(id));";
