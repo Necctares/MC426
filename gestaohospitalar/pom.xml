@@ -38,7 +38,7 @@
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
-      <version>8.0.26</version>
+      <version>8.0.27</version>
     </dependency>
   </dependencies>
   <build>
@@ -87,7 +87,7 @@
         <executions>
           <execution>
             <id>checkstyle</id>
-            <phase>validate</phase>
+            <phase>none</phase>
             <goals>
               <goal>check</goal>
             </goals>

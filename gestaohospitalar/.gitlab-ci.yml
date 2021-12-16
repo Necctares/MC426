@@ -1,0 +1,37 @@
+variables:
+  MAVEN_OPTS: -Dmaven.repo.local=.m2/repository
+
+image: maven:latest
+
+before_script:
+  - "Xvfb :99 &"
+  - "export DISPLAY=:99"
+
+stages:
+    - build
+    - test
+
+
+cache:
+  paths:
+    - .m2/repository
+    - target
+
+build_job:
+  stage: build
+  tags:
+    - docker 
+
+  script: 
+    - echo "Iniciada a compilacao..."
+    - "mvn -f gestaohospitalar/pom.xml compile -Dcheckstyle.skip"
+
+
+test_job:
+  stage: test
+  tags:
+    - docker 
+
+  script: 
+    - echo "Iniciado os testes..."
+    - "mvn -f gestaohospitalar test -Dcheckstyle.skip"

@@ -1,16 +1,16 @@
-package com.grupomc426.Targets;
+package com.grupomc426.Targets.Usuarios;
 
 public class Pessoa {
     private String nome;
     private String telefone;
     private String cpf;
-    private String idade;
-
-    public Pessoa(String nome, String telefone, String cpf, String idade){
+    private String anoNascimento;
+    
+    public Pessoa(String nome, String telefone, String cpf, String anoNascimento){
         this.cpf = cpf;
         this.telefone = telefone;
         this.nome = nome;
-        this.idade = idade;
+        this.anoNascimento = anoNascimento;
     }
 
     public String getCPF() {
@@ -22,7 +22,7 @@ public class Pessoa {
     public String getTelefone() {
         return telefone;
     }
-    public String getIdade() {
-        return idade;
+    public String getAnoNascimento() {
+        return anoNascimento;
     }
 }
