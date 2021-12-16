@@ -87,6 +87,10 @@ public class controladorProntuario {
         return db.obterMedico(cpf);
     }
 
+    public Medico obterMedicoCRM(String crm){
+        return db.obterMedicoCRM(crm);
+    }
+
     public Pessoa obterPessoa(String cpf) {
         return db.obterPessoa(cpf);
     }

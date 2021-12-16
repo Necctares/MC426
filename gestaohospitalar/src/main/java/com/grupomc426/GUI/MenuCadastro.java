@@ -37,10 +37,8 @@ public class MenuCadastro extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         botaoConfirmar = new javax.swing.JButton();
         botaoVoltar = new javax.swing.JButton();
-        tipoCadastro = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         usuarioCadastro = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
         senhaCadastro = new javax.swing.JPasswordField();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -70,23 +68,13 @@ public class MenuCadastro extends javax.swing.JFrame {
             }
         });
 
-        tipoCadastro
-                .setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Paciente", "Enfermeiro", "Médico" }));
-        tipoCadastro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tipoCadastroActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setText("Usuário");
+        jLabel2.setText("Nome");
 
         usuarioCadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 usuarioCadastroActionPerformed(evt);
             }
         });
-
-        jLabel3.setText("Tipo");
 
         senhaCadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,7 +102,6 @@ public class MenuCadastro extends javax.swing.JFrame {
                         .addComponent(botaoVoltar).addGap(24, 24, 24))
                 .addGroup(layout.createSequentialGroup().addGap(54, 54, 54)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createSequentialGroup().addComponent(jLabel4)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
                                                 javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -128,8 +115,6 @@ public class MenuCadastro extends javax.swing.JFrame {
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addComponent(usuarioCadastro, javax.swing.GroupLayout.PREFERRED_SIZE,
                                                         186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(tipoCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 186,
-                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addComponent(telefoneCadastro, javax.swing.GroupLayout.PREFERRED_SIZE,
                                                         186, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addComponent(nascimentoCadastro,
@@ -140,11 +125,7 @@ public class MenuCadastro extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(layout
                 .createSequentialGroup().addGap(29, 29, 29).addComponent(jLabel1).addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(tipoCadastro, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 24,
-                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE))
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(usuarioCadastro, javax.swing.GroupLayout.PREFERRED_SIZE,
@@ -202,9 +183,6 @@ public class MenuCadastro extends javax.swing.JFrame {
             telaErro.setVisible(true);
             return "Ok";
         }
-    }
-
-    private void tipoCadastroActionPerformed(java.awt.event.ActionEvent evt) {
     }
 
     private void usuarioCadastroActionPerformed(java.awt.event.ActionEvent evt) {
@@ -267,7 +245,6 @@ public class MenuCadastro extends javax.swing.JFrame {
     private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -275,7 +252,6 @@ public class MenuCadastro extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPasswordField senhaCadastro;
     private javax.swing.JTextField telefoneCadastro;
-    private javax.swing.JComboBox<String> tipoCadastro;
     private javax.swing.JTextField usuarioCadastro;
     // End of variables declaration
 
@@ -309,14 +285,6 @@ public class MenuCadastro extends javax.swing.JFrame {
 
     public void setTelefoneCadastro(javax.swing.JTextField telefoneCadastro) {
         this.telefoneCadastro = telefoneCadastro;
-    }
-
-    public javax.swing.JComboBox<String> getTipoCadastro() {
-        return tipoCadastro;
-    }
-
-    public void setTipoCadastro(javax.swing.JComboBox<String> tipoCadastro) {
-        this.tipoCadastro = tipoCadastro;
     }
 
     public javax.swing.JTextField getUsuarioCadastro() {

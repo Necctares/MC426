@@ -3,8 +3,6 @@ package com.grupomc426.DataBase.Helpers;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.ArrayList;
-import java.util.List;
 
 import com.grupomc426.DataBase.HorariosDB;
 import com.grupomc426.Targets.Atendimento.Agenda;
@@ -44,12 +42,12 @@ public class HelperHorarios implements HelperDB {
         }
     }
 
-    public boolean registrarHorario(Medico medico, LocalDateTime horario) {
+    public boolean registrarHorario(Medico medico, LocalDateTime horario, Pessoa paciente) {
         if (horario.isAfter(LocalDateTime.now())) {
             Map<String, String> mapaHorario = new HashMap<String, String>();
             mapaHorario.put("horario", horario.toString());
             mapaHorario.put("crm", medico.getCrm());
-            mapaHorario.put("cpf", null);
+            mapaHorario.put("cpf", paciente.getCPF());
             return db.adicionarHorario(mapaHorario);
         } else {
             return false;
@@ -74,6 +72,15 @@ public class HelperHorarios implements HelperDB {
         mapaHorario.put("crm", medico.getCrm());
         mapaHorario.put("cpf", null);
         return db.alterarReservaHorario(mapaHorario);
+    }
+
+    public Map<String, String> obterMedicos() {
+        Map<String, String> medicos = db.obterMedicos();
+        if (medicos.size() > 0) {
+            return medicos;
+        } else {
+            return null;
+        }
     }
 
     public Agenda obterAgenda(Medico medico) {

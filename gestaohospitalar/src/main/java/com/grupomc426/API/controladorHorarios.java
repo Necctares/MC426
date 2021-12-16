@@ -1,5 +1,7 @@
 package com.grupomc426.API;
 
+import java.util.Map;
+
 import com.grupomc426.DataBase.Helpers.HelperHorarios;
 import com.grupomc426.Targets.Atendimento.*;
 import com.grupomc426.Targets.Usuarios.*;
@@ -11,8 +13,12 @@ public class controladorHorarios {
         db = HelperHorarios.getDB();
     }
 
-    public boolean registrarHorario(Medico medico, java.time.LocalDateTime horario) {
-        return db.registrarHorario(medico, horario);
+    public Map<String, String> obterMedicos(){
+        return db.obterMedicos();
+    }
+
+    public boolean registrarHorario(Medico medico, java.time.LocalDateTime horario, Pessoa paciente) {
+        return db.registrarHorario(medico, horario, paciente);
     }
 
     public boolean reservarHorario(Medico medico, java.time.LocalDateTime horario, Pessoa pessoa) {

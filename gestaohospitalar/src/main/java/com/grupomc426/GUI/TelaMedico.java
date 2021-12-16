@@ -62,7 +62,7 @@ public class TelaMedico extends javax.swing.JFrame {
         jToggleButton1.setText("Minhas Consultas");
         jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
+                jToggleButton1ActionPerformed(evt, medico);
             }
         });
 
@@ -161,9 +161,9 @@ public class TelaMedico extends javax.swing.JFrame {
 
     }// </editor-fold>  
     
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                               
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt, Usuario user) {                                               
         // TODO add your handling code here:
-        TelaMinhasConsultas minhaConsulta = new TelaMinhasConsultas();
+        TelaMinhasConsultas minhaConsulta = new TelaMinhasConsultas(user);
         minhaConsulta.setVisible(true);
     }                                              
 

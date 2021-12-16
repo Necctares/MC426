@@ -148,6 +148,10 @@ public class HelperProntuario implements HelperDB {
         return db.obterMedico(cpf);
     }
 
+    public Medico obterMedicoCRM(String crm){
+        return db.obterMedicoCRM(crm);
+    }
+
     @Override
     public boolean tentarLogin(Usuario usuario) throws IllegalArgumentException {
         return db.tentarLogin(usuario);

@@ -44,7 +44,7 @@ public class TelaPaciente extends javax.swing.JFrame {
         jToggleButton1.setText("Minhas Consultas");
         jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
+                jToggleButton1ActionPerformed(evt, user);
             }
         });
 
@@ -58,7 +58,7 @@ public class TelaPaciente extends javax.swing.JFrame {
         jToggleButton3.setText("Marcar Consultas");
         jToggleButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton3ActionPerformed(evt);
+                jToggleButton3ActionPerformed(evt, user);
             }
         });
 
@@ -119,9 +119,9 @@ public class TelaPaciente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt, Usuario user) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         // TODO add your handling code here:
-        TelaMinhasConsultas minhaConsulta = new TelaMinhasConsultas();
+        TelaMinhasConsultas minhaConsulta = new TelaMinhasConsultas(user);
         minhaConsulta.setVisible(true);
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
@@ -131,10 +131,13 @@ public class TelaPaciente extends javax.swing.JFrame {
         proximaConsultas.setVisible(true);
     } //GEN-LAST:event_jToggleButton2ActionPerformed
 
-    private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
-        // TODO add your handling code here:
-        TelaMarcarConsulta marcarConsulta = new TelaMarcarConsulta();
-        marcarConsulta.setVisible(true);
+    private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt, Usuario user) {//GEN-FIRST:event_jToggleButton3ActionPerformed
+        if(user != null){
+        TelaMarcarConsulta marcarConsulta = new TelaMarcarConsulta(user);
+        marcarConsulta.setVisible(true);}else{
+            TelaErroGenerica erro = new TelaErroGenerica("Erro, acao invalida");
+            erro.setVisible(true);
+        }
     }//GEN-LAST:event_jToggleButton3ActionPerformed
 
     private void jToggleButton4ActionPerformed(java.awt.event.ActionEvent evt, Usuario user) {//GEN-FIRST:event_jToggleButton4ActionPerformed

@@ -1,9 +1,11 @@
 package com.grupomc426.DataBase;
 
 import java.util.Map;
+
+import com.grupomc426.API.controladorProntuario;
+import com.grupomc426.Targets.Usuarios.Pessoa;
+
 import java.util.HashMap;
-import java.util.ArrayList;
-import java.util.List;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -13,8 +15,8 @@ public class HorariosDB extends DataBase {
 
     public boolean adicionarHorario(Map<String, String> horario) {
         makeAcess();
-        String cmd = "INSERT INTO HORARIO VALUES " + horario.get("data")
-                + horario.get("crm") + horario.get("cpf");
+        String cmd = "INSERT INTO HORARIO VALUES ('" + horario.get("data")
+                + "','" + horario.get("crm") + "','" + horario.get("cpf") + "', 0);";
         try {
             statement.executeUpdate(cmd);
         } catch (SQLException e) {
@@ -23,6 +25,28 @@ public class HorariosDB extends DataBase {
         }
         closeAcess();
         return true;
+    }
+
+    public Map<String, String> obterMedicos() {
+        makeAcess();
+        controladorProntuario cdb = new controladorProntuario();
+        String cmd = "SELECT * FROM MEDICO;";
+        Map<String, String> medicos = new HashMap<String, String>();
+        try {
+            resultSet = statement.executeQuery(cmd);
+            while (resultSet.next()) {
+                Pessoa pessoa = cdb.obterPessoa(resultSet.getString("cpf"));
+                if (pessoa != null) {
+                    medicos.put(resultSet.getString("crm"), pessoa.getNome());
+                }
+            }
+            resultSet.close();
+            resultSet = null;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        closeAcess();
+        return medicos;
     }
 
     public boolean alterarReservaHorario(Map<String, String> horario) {
